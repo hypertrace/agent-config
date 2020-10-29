@@ -1,0 +1,45 @@
+syntax = "proto3";
+
+option go_package = "github.com/traceableai/goagent/config";
+
+// AgentConfig covers the config for agents
+message AgentConfig {
+    // serviceName identifies the service/process running
+    string serviceName = 1;
+
+    Reporting reporting = 2;
+
+    DataCapture dataCapture = 3;
+}
+
+// Reporting covers the options related to the mechanics for sending data to the
+// tracing server o collector.
+message Reporting {
+    // address represents the host for reporting the traes e.g. api.traceable.ai
+    string address = 1;
+
+    // secure permits connecting to the trace endpoint without a certificate
+    bool secure = 2;
+}
+
+// Message describes what message should be considered for certain DataCapture option
+message Message {
+    bool request = 1;
+    bool response = 2;
+}
+
+// DataCapture describes the elements to be captured by the agent instrumentation
+message DataCapture {
+    // httpHeaders enables/disables the capture of the request/response headers in HTTP
+    Message httpHeaders = 1;
+
+    // httpBody enables/disables the capture of the request/response body in HTTP
+    Message httpBody = 2;
+
+    // rpcMetadata enables/disables the capture of the request/response metadata in RPC
+    Message rpcMetadata = 3;
+
+    // rpcBody enables/disables the capture of the request/response body in RPC
+    Message rpcBody = 4;
+}
+
