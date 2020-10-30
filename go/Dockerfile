@@ -3,9 +3,9 @@
 
 FROM golang
 
-WORKDIR /go/src/agent-config
+WORKDIR /go/src/github.com/hypertrace/agent-config/go
 
-COPY config.proto config.proto
+COPY config.proto ../config.proto
 
 RUN go get -u github.com/iancoleman/strcase
 RUN go get -u github.com/tallstoat/pbparser

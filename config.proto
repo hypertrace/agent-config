@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-option go_package = "github.com/traceableai/goagent/config";
+option go_package = "github.com/hypertrace/agent-config/go/config";
 
 // AgentConfig covers the config for agents
 message AgentConfig {
@@ -18,7 +18,7 @@ message Reporting {
     // address represents the host for reporting the traes e.g. api.traceable.ai
     string address = 1;
 
-    // secure permits connecting to the trace endpoint without a certificate
+    // secure when false, permits connecting to the trace endpoint without a certificate
     bool secure = 2;
 }
 

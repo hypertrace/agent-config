@@ -30,8 +30,8 @@ func getStringEnv(name string) (string, bool) {
 	return "", false
 }
 
-// loadFromFile loads the agent config from a file
-func loadFromFile(c *AgentConfig, filename string) error {
+// loadFromConfigFile loads the agent config from a file
+func loadFromConfigFile(c *AgentConfig, filename string) error {
 	content, err := ioutil.ReadFile(filename)
 	if err != nil {
 		return err
@@ -49,6 +49,27 @@ func fileExists(filename string) bool {
 	return !info.IsDir()
 }
 
+// LoadFromFile loads the configuration from the default values, a specific config file 
+// and env vars.
+func LoadFromFile(configFile string) AgentConfig {
+	cfg := AgentConfig{}
+
+	absConfigFile, err := filepath.Abs(configFile)
+	if err != nil {
+		log.Printf("failed to resolve absolute path for %q: %v.\n", configFile, err)
+	}
+
+	if !fileExists(absConfigFile) {
+		log.Printf("config file %q not found", absConfigFile)
+	}
+
+	loadFromConfigFile(&cfg, absConfigFile)
+
+	cfg.loadFromEnv("HT_", &defaultConfig)
+
+	return cfg
+}
+
 // Load loads the configuration from the default values, config file and env vars.
 func Load() AgentConfig {
 	cfg := AgentConfig{}
@@ -64,7 +85,7 @@ func Load() AgentConfig {
 		}
 
 		if fileExists(absConfigFile) {
-			loadFromFile(&cfg, absConfigFile)
+			loadFromConfigFile(&cfg, absConfigFile)
 		} else {
 			log.Printf("config file %q does not exist.\n", absConfigFile)
 		}
