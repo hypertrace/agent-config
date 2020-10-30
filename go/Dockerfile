@@ -1,4 +1,4 @@
-# This Dockerfile serves for the solely purpose of being able to run the golang tasks without
+# This Dockerfile serves solely for the purpose of being able to run the golang tasks without
 # the need of having Go installed locally.
 
 FROM golang
