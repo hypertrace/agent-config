@@ -1,6 +1,7 @@
 syntax = "proto3";
 
 option go_package = "github.com/hypertrace/agent-config/config";
+option java_package = "org.hypertrace.agent.config";
 
 // AgentConfig covers the config for agents
 message AgentConfig {
