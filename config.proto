@@ -20,7 +20,7 @@ message AgentConfig {
 // tracing server o collector.
 message Reporting {
     // address represents the host for reporting the traes e.g. api.traceable.ai
-    string address = 1;
+    google.protobuf.StringValue address = 1;
 
     // secure when false, permits connecting to the trace endpoint without a certificate
     google.protobuf.BoolValue secure = 2;
