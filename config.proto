@@ -1,8 +1,8 @@
 syntax = "proto3";
 
-option go_package = "github.com/hypertrace/agent-config/config";
-
 import "google/protobuf/wrappers.proto";
+
+option go_package = "github.com/hypertrace/agent-config/config";
 
 // AgentConfig covers the config for agents
 message AgentConfig {
