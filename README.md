@@ -1,3 +1,5 @@
+[![Build Status][ci-img]][ci]
+
 # Agent Config
 
 Agent config contains the configuration specs for the Hypertrace agents.
@@ -17,3 +19,6 @@ Before submitting a PR, make sure you run the linter:
 ```bash
 protolint config.proto
 ```
+
+[ci-img]: https://github.com/hypertrace/agent-config/workflows/lint%20protobuf/badge.svg
+[ci]: https://github.com/hypertrace/agent-config/actions
