@@ -1,5 +1,7 @@
 syntax = "proto3";
 
+import "google/protobuf/wrappers.proto";
+
 option go_package = "github.com/hypertrace/agent-config/config";
 option java_package = "org.hypertrace.agent.config";
 
@@ -19,19 +21,19 @@ message AgentConfig {
 // tracing server o collector.
 message Reporting {
     // address represents the host for reporting the traes e.g. api.traceable.ai
-    string address = 1;
+    google.protobuf.StringValue address = 1;
 
     // secure when false, permits connecting to the trace endpoint without a certificate
-    bool secure = 2;
+    google.protobuf.BoolValue secure = 2;
 }
 
 // Message describes what message should be considered for certain DataCapture option
 message Message {
     // request describes the outgoing/incoming message in a client/request operation
-    bool request = 1;
+    google.protobuf.BoolValue request = 1;
 
     // response describes the incoming/outgoing message in a client/request operation
-    bool response = 2;
+    google.protobuf.BoolValue response = 2;
 }
 
 // DataCapture describes the elements to be captured by the agent instrumentation
