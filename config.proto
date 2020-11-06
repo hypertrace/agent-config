@@ -5,10 +5,14 @@ import "google/protobuf/wrappers.proto";
 option go_package = "github.com/hypertrace/agent-config/config";
 option java_package = "org.hypertrace.agent.config";
 
-// AgentConfig covers the config for agents
+// AgentConfig covers the config for agents.
+// The config uses wrappers for primitive types to allow nullable values.
+// The nullable values are used for instance to explicitly disable data capture or secure connection.
+// Since the wrappers change structure of the objects the marshalling and unmarshalling
+// have to be done via protobuf marshallers.
 message AgentConfig {
     // serviceName identifies the service/process running
-    string serviceName = 1;
+    google.protobuf.StringValue serviceName = 1;
 
     // reporting holds the reporting settings for the agent
     Reporting reporting = 2;
