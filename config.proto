@@ -51,6 +51,7 @@ message DataCapture {
     Message rpcBody = 4;
 }
 
+// PropagationFormat represents the propagation formats supported by agents
 enum PropagationFormat {
     // B3 propagation format, agents should support both multi and single value formats
     // see https://github.com/openzipkin/b3-propagation

@@ -3,6 +3,7 @@ lint:
     all_default: true
     remove:
       - FIELD_NAMES_LOWER_SNAKE_CASE
+      - ENUM_FIELD_NAMES_ZERO_VALUE_END_WITH
 
   rules_option:
     # MAX_LINE_LENGTH rule option.
