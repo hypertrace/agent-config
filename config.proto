@@ -17,8 +17,6 @@ message AgentConfig {
     // reporting holds the reporting settings for the agent
     Reporting reporting = 2;
 
-    // opa describes the setting related to the Open Policy Agent
-    Opa opa = 4;
 
     // dataCapture describes the data being captured by instrumentation
     DataCapture dataCapture = 3;
@@ -35,6 +33,9 @@ message Reporting {
 
     // user specific token to access Traceable API
     google.protobuf.StringValue token = 3;
+
+    // opa describes the setting related to the Open Policy Agent
+    Opa opa = 4;
 }
 
 // Opa covers the options related to the mechanics for getting Open Policy Agent configuration file.
@@ -43,8 +44,8 @@ message Opa {
     // address represents the host for polling OPA config file e.g. http://opa.traceableai:8181/
     google.protobuf.StringValue address = 1;
 
-    // pool period in seconds to query OPA service
-    google.protobuf.Int32Value poolPeriod  = 2;
+    // poll period in seconds to query OPA service
+    google.protobuf.Int32Value pollPeriod  = 2;
 }
 
 // Message describes what message should be considered for certain DataCapture option
