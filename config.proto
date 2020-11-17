@@ -83,5 +83,5 @@ enum PropagationFormat {
 
     // W3C Propagation format
     // see https://www.w3.org/TR/trace-context/
-    TRACE_CONTEXT = 1;
+    TRACECONTEXT = 1;
 }
