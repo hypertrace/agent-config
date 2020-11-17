@@ -19,6 +19,9 @@ message AgentConfig {
 
     // dataCapture describes the data being captured by instrumentation
     DataCapture dataCapture = 3;
+
+    // propagationFormats list the supported propagation formats
+    repeated PropagationFormat propagationFormats = 4;
 }
 
 // Reporting covers the options related to the mechanics for sending data to the
@@ -55,3 +58,13 @@ message DataCapture {
     Message rpcBody = 4;
 }
 
+// PropagationFormat represents the propagation formats supported by agents
+enum PropagationFormat {
+    // B3 propagation format, agents should support both multi and single value formats
+    // see https://github.com/openzipkin/b3-propagation
+    B3 = 0;
+
+    // W3C Propagation format
+    // see https://www.w3.org/TR/trace-context/
+    TRACE_CONTEXT = 1;
+}
