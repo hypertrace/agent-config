@@ -79,9 +79,9 @@ message DataCapture {
 enum PropagationFormat {
     // B3 propagation format, agents should support both multi and single value formats
     // see https://github.com/openzipkin/b3-propagation
-    B3 = 0;
+    b3 = 0;
 
     // W3C Propagation format
     // see https://www.w3.org/TR/trace-context/
-    TRACECONTEXT = 1;
+    tracecontext = 1;
 }
