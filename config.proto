@@ -32,7 +32,7 @@ message Reporting {
     // address represents the host for reporting the traces e.g. api.traceable.ai
     google.protobuf.StringValue address = 1;
 
-    // when false, permits connecting to the trace endpoint without a certificate
+    // when `true`, avoids connecting to the trace endpoint without a certificate
     google.protobuf.BoolValue secure = 2;
 
     // user specific token to access Traceable API
@@ -54,25 +54,25 @@ message Opa {
 
 // Message describes what message should be considered for certain DataCapture option
 message Message {
-    // when `true` it enables the capture for the request in a client/request operation
+    // when `false` it disables the capture for the request in a client/request operation
     google.protobuf.BoolValue request = 1;
 
-    // when `true` it enables the capture for the response in a client/request operation
+    // when `false` it disables the capture for the response in a client/request operation
     google.protobuf.BoolValue response = 2;
 }
 
 // DataCapture describes the elements to be captured by the agent instrumentation
 message DataCapture {
-    // when `true` it enables the capture of the request/response headers in HTTP
+    // httpHeaders enables/disables the capture of the request/response headers in HTTP
     Message httpHeaders = 1;
 
-    // when `true` it enables the capture of the request/response body in HTTP
+    // httpBody enables/disables the capture of the request/response body in HTTP
     Message httpBody = 2;
 
-    // when `true` it enables the capture of the request/response metadata in RPC
+    // rpcMetadata enables/disables the capture of the request/response metadata in RPC
     Message rpcMetadata = 3;
 
-    // when `true` it enables the capture of the request/response body in RPC
+    // rpcBody enables/disables the capture of the request/response body in RPC
     Message rpcBody = 4;
 }
 
