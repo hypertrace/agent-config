@@ -11,7 +11,7 @@ In order to make sure compatibility across languages and versions, the following
 - All messages and fields should include a comment, describing what the field describes and/or the effect on a certain value, e.g. "when false, permits connecting to the trace endpoint without a certificate"
 - Fields must not be removed, if there is a need to deprecate a config settings, the field should be marked as deprecated.
 - Fields should not depend on each others, every field should be independent and self contained to avoid config logic in the libraries
-- Time duration fields should include a suffix indicating the time unit e.g. `retryIntervalInSecs`
+- Time duration fields should include a suffix indicating the time unit e.g. `retryIntervalSeconds`
 - Config must not be modified in runtime by the user through code.
 
 ## Contributing
