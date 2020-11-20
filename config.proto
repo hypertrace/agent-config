@@ -48,7 +48,7 @@ message Opa {
     google.protobuf.StringValue address = 1;
 
     // poll period in seconds to query OPA service
-    google.protobuf.Int32Value pollPeriod  = 2;
+    google.protobuf.Int32Value pollPeriodSeconds  = 2;
 }
 
 // Message describes what message should be considered for certain DataCapture option
