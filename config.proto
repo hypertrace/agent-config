@@ -2,6 +2,8 @@ syntax = "proto3";
 
 import "google/protobuf/wrappers.proto";
 
+package org.hypertrace.agent.config;
+
 option go_package = "github.com/hypertrace/agent-config/config";
 option java_package = "org.hypertrace.agent.config";
 
