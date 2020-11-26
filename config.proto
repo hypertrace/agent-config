@@ -13,12 +13,11 @@ option java_package = "org.hypertrace.agent.config";
 // Since the wrappers change structure of the objects the marshalling and unmarshalling
 // have to be done via protobuf marshallers.
 message AgentConfig {
-    // serviceName identifies the service/process running
+    // serviceName identifies the service/process running e.g. "my service"
     google.protobuf.StringValue serviceName = 1;
 
     // reporting holds the reporting settings for the agent
     Reporting reporting = 2;
-
 
     // dataCapture describes the data being captured by instrumentation
     DataCapture dataCapture = 3;
@@ -33,7 +32,7 @@ message Reporting {
     // address represents the host for reporting the traces e.g. api.traceable.ai
     google.protobuf.StringValue address = 1;
 
-    // secure when false, permits connecting to the trace endpoint without a certificate
+    // when `true`, connects to endpoints over TLS.
     google.protobuf.BoolValue secure = 2;
 
     // user specific token to access Traceable API
@@ -55,10 +54,10 @@ message Opa {
 
 // Message describes what message should be considered for certain DataCapture option
 message Message {
-    // request describes the outgoing/incoming message in a client/request operation
+    // when `false` it disables the capture for the request in a client/request operation
     google.protobuf.BoolValue request = 1;
 
-    // response describes the incoming/outgoing message in a client/request operation
+    // when `false` it disables the capture for the response in a client/request operation
     google.protobuf.BoolValue response = 2;
 }
 
