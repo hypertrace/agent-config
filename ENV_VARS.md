@@ -9,7 +9,7 @@ Agents can be configured using environment variables:
 |------|-------------|
 | HT_SERVICE_NAME | Identifies the service/process running e.g. "my service" |
 | HT_REPORTING_ADDRESS | Represents the host for reporting the traces e.g. api.traceable.ai |
-| HT_REPORTING_SECURE | When `true`, avoids connecting to the trace endpoint without a certificate |
+| HT_REPORTING_SECURE | When `true`, connects to endpoints over TLS. |
 | HT_REPORTING_TOKEN | User specific token to access Traceable API |
 | HT_REPORTING_OPA_ADDRESS | Represents the host for polling OPA config file e.g. http://opa.traceableai:8181/ |
 | HT_REPORTING_OPA_POLL_PERIOD_SECONDS | Poll period in seconds to query OPA service |

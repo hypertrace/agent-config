@@ -32,7 +32,7 @@ message Reporting {
     // address represents the host for reporting the traces e.g. api.traceable.ai
     google.protobuf.StringValue address = 1;
 
-    // when `true`, avoids connecting to the trace endpoint without a certificate
+    // when `true`, connects to endpoints over TLS.
     google.protobuf.BoolValue secure = 2;
 
     // user specific token to access Traceable API
