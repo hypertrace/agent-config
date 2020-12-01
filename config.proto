@@ -29,8 +29,8 @@ message AgentConfig {
 // Reporting covers the options related to the mechanics for sending data to the
 // tracing server o collector.
 message Reporting {
-    // address represents the host for reporting the traces e.g. api.traceable.ai
-    google.protobuf.StringValue address = 1;
+    // endpoint represents the endpoint for reporting the traces e.g. http://api.traceable.ai:9411/api/v2/spans
+    google.protobuf.StringValue endpoint = 1;
 
     // when `true`, connects to endpoints over TLS.
     google.protobuf.BoolValue secure = 2;
@@ -45,8 +45,8 @@ message Reporting {
 // Opa covers the options related to the mechanics for getting Open Policy Agent configuration file.
 // The client should use secure and token option from reporting settings.
 message Opa {
-    // address represents the host for polling OPA config file e.g. http://opa.traceableai:8181/
-    google.protobuf.StringValue address = 1;
+    // endpoint represents the endpoint for polling OPA config file e.g. http://opa.traceableai:8181/
+    google.protobuf.StringValue endpoint = 1;
 
     // poll period in seconds to query OPA service
     google.protobuf.Int32Value pollPeriodSeconds  = 2;
