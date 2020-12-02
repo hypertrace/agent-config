@@ -50,6 +50,9 @@ message Opa {
 
     // poll period in seconds to query OPA service
     google.protobuf.Int32Value pollPeriodSeconds  = 2;
+
+    // when `true` Open Policy Agent evaluation is enabled to block request
+    google.protobuf.BoolValue enabled = 3;
 }
 
 // Message describes what message should be considered for certain DataCapture option
