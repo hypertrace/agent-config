@@ -175,7 +175,7 @@ func writeHeaders(w io.StringWriter) error {
 // writeRows write the env var rows in the table
 func writeRows(w io.StringWriter, m pbparser.MessageElement, types map[string]pbparser.MessageElement, prefix string) error {
 	for _, mf := range m.Fields {
-		if strings.HasPrefix(mf.Type.Name(), "google.protobuf.") {
+		if strings.HasPrefix(mf.Type.Name(), "google.protobuf.") { // i.e. it is scalar
 			_, err := w.WriteString(fmt.Sprintf(
 				"| %s | %s |\n",
 				prefix+toEnvFormat(mf.Name),
@@ -184,8 +184,8 @@ func writeRows(w io.StringWriter, m pbparser.MessageElement, types map[string]pb
 			if err != nil {
 				return err
 			}
-		} else if namedType, ok := mf.Type.(pbparser.NamedDataType); ok {
-			err := writeRows(w, types[mf.Type.Name()], types, prefix+toEnvFormat(namedType.Name())+"_")
+		} else if _, ok := mf.Type.(pbparser.NamedDataType); ok {
+			err := writeRows(w, types[mf.Type.Name()], types, prefix+toEnvFormat(mf.Name)+"_")
 			if err != nil {
 				return err
 			}
