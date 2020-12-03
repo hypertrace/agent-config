@@ -8,16 +8,16 @@ Agents can be configured using environment variables:
 | Name | Description |
 |------|-------------|
 | HT_SERVICE_NAME | Identifies the service/process running e.g. "my service" |
-| HT_REPORTING_ADDRESS | Represents the host for reporting the traces e.g. api.traceable.ai |
+| HT_REPORTING_ENDPOINT | Represents the endpoint for reporting the traces e.g. http://api.traceable.ai:9411/api/v2/spans |
 | HT_REPORTING_SECURE | When `true`, connects to endpoints over TLS. |
 | HT_REPORTING_TOKEN | User specific token to access Traceable API |
-| HT_REPORTING_OPA_ADDRESS | Represents the host for polling OPA config file e.g. http://opa.traceableai:8181/ |
+| HT_REPORTING_OPA_ENDPOINT | Represents the endpoint for polling OPA config file e.g. http://opa.traceableai:8181/ |
 | HT_REPORTING_OPA_POLL_PERIOD_SECONDS | Poll period in seconds to query OPA service |
-| HT_DATA_CAPTURE_MESSAGE_REQUEST | When `false` it disables the capture for the request in a client/request operation |
-| HT_DATA_CAPTURE_MESSAGE_RESPONSE | When `false` it disables the capture for the response in a client/request operation |
-| HT_DATA_CAPTURE_MESSAGE_REQUEST | When `false` it disables the capture for the request in a client/request operation |
-| HT_DATA_CAPTURE_MESSAGE_RESPONSE | When `false` it disables the capture for the response in a client/request operation |
-| HT_DATA_CAPTURE_MESSAGE_REQUEST | When `false` it disables the capture for the request in a client/request operation |
-| HT_DATA_CAPTURE_MESSAGE_RESPONSE | When `false` it disables the capture for the response in a client/request operation |
-| HT_DATA_CAPTURE_MESSAGE_REQUEST | When `false` it disables the capture for the request in a client/request operation |
-| HT_DATA_CAPTURE_MESSAGE_RESPONSE | When `false` it disables the capture for the response in a client/request operation |
+| HT_DATA_CAPTURE_HTTP_HEADERS_REQUEST | When `false` it disables the capture for the request in a client/request operation |
+| HT_DATA_CAPTURE_HTTP_HEADERS_RESPONSE | When `false` it disables the capture for the response in a client/request operation |
+| HT_DATA_CAPTURE_HTTP_BODY_REQUEST | When `false` it disables the capture for the request in a client/request operation |
+| HT_DATA_CAPTURE_HTTP_BODY_RESPONSE | When `false` it disables the capture for the response in a client/request operation |
+| HT_DATA_CAPTURE_RPC_METADATA_REQUEST | When `false` it disables the capture for the request in a client/request operation |
+| HT_DATA_CAPTURE_RPC_METADATA_RESPONSE | When `false` it disables the capture for the response in a client/request operation |
+| HT_DATA_CAPTURE_RPC_BODY_REQUEST | When `false` it disables the capture for the request in a client/request operation |
+| HT_DATA_CAPTURE_RPC_BODY_RESPONSE | When `false` it disables the capture for the response in a client/request operation |
