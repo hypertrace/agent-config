@@ -77,6 +77,9 @@ message DataCapture {
 
     // rpcBody enables/disables the capture of the request/response body in RPC
     Message rpcBody = 4;
+
+    // maximum value of span's attribute value in characters. Default should be 128.
+    google.protobuf.Int32Value attributeValueMaxLength = 5;
 }
 
 // PropagationFormat represents the propagation formats supported by agents
