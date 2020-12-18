@@ -77,6 +77,9 @@ message DataCapture {
 
     // rpcBody enables/disables the capture of the request/response body in RPC
     Message rpcBody = 4;
+
+    // maximum size of captured body in bytes. Default should be 131_072 (128 KiB).
+    google.protobuf.Int32Value bodyMaxSizeBytes = 5;
 }
 
 // PropagationFormat represents the propagation formats supported by agents
