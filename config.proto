@@ -24,6 +24,9 @@ message AgentConfig {
 
     // propagation_formats list the supported propagation formats
     repeated PropagationFormat propagation_formats = 4;
+
+    // ignore heuristics define the different heuristics for ignoring
+    repeated IgnoreHeuristics ignore_heuristics = 5;
 }
 
 // Reporting covers the options related to the mechanics for sending data to the
@@ -91,4 +94,10 @@ enum PropagationFormat {
     // W3C Propagation format
     // see https://www.w3.org/TR/trace-context/
     TRACECONTEXT = 1;
+}
+
+// IgnoreHeuristics represents the heuristics used to ignore certain calls from tracing
+message IgnoreHeuristics {
+    // url_regex defines the regular expression for the request path to be ignored
+    google.protobuf.StringValue url_regex = 1;
 }
