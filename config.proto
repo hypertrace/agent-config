@@ -13,17 +13,17 @@ option java_package = "org.hypertrace.agent.config";
 // Since the wrappers change structure of the objects the marshalling and unmarshalling
 // have to be done via protobuf marshallers.
 message AgentConfig {
-    // serviceName identifies the service/process running e.g. "my service"
-    google.protobuf.StringValue serviceName = 1;
+    // service_name identifies the service/process running e.g. "my service"
+    google.protobuf.StringValue service_name = 1;
 
     // reporting holds the reporting settings for the agent
     Reporting reporting = 2;
 
-    // dataCapture describes the data being captured by instrumentation
-    DataCapture dataCapture = 3;
+    // data_capture describes the data being captured by instrumentation
+    DataCapture data_capture = 3;
 
-    // propagationFormats list the supported propagation formats
-    repeated PropagationFormat propagationFormats = 4;
+    // propagation_formats list the supported propagation formats
+    repeated PropagationFormat propagation_formats = 4;
 }
 
 // Reporting covers the options related to the mechanics for sending data to the
@@ -49,7 +49,7 @@ message Opa {
     google.protobuf.StringValue endpoint = 1;
 
     // poll period in seconds to query OPA service
-    google.protobuf.Int32Value pollPeriodSeconds  = 2;
+    google.protobuf.Int32Value poll_period_seconds  = 2;
 
     // when `true` Open Policy Agent evaluation is enabled to block request
     google.protobuf.BoolValue enabled = 3;
@@ -66,20 +66,20 @@ message Message {
 
 // DataCapture describes the elements to be captured by the agent instrumentation
 message DataCapture {
-    // httpHeaders enables/disables the capture of the request/response headers in HTTP
-    Message httpHeaders = 1;
+    // http_headers enables/disables the capture of the request/response headers in HTTP
+    Message http_headers = 1;
 
-    // httpBody enables/disables the capture of the request/response body in HTTP
-    Message httpBody = 2;
+    // http_body enables/disables the capture of the request/response body in HTTP
+    Message http_body = 2;
 
-    // rpcMetadata enables/disables the capture of the request/response metadata in RPC
-    Message rpcMetadata = 3;
+    // rpc_metadata enables/disables the capture of the request/response metadata in RPC
+    Message rpc_metadata = 3;
 
-    // rpcBody enables/disables the capture of the request/response body in RPC
-    Message rpcBody = 4;
+    // rpc_body enables/disables the capture of the request/response body in RPC
+    Message rpc_body = 4;
 
     // maximum size of captured body in bytes. Default should be 131_072 (128 KiB).
-    google.protobuf.Int32Value bodyMaxSizeBytes = 5;
+    google.protobuf.Int32Value body_max_size_bytes = 5;
 }
 
 // PropagationFormat represents the propagation formats supported by agents

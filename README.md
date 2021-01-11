@@ -26,3 +26,8 @@ protolint config.proto
 
 [ci-img]: https://github.com/hypertrace/agent-config/workflows/lint%20protobuf/badge.svg
 [ci]: https://github.com/hypertrace/agent-config/actions
+
+Initialize the git submodules before generating the env vars.
+```bash
+git submodule update  --init  --recursive
+```
