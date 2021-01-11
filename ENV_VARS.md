@@ -13,6 +13,7 @@ Agents can be configured using environment variables:
 | HT_REPORTING_TOKEN | User specific token to access Traceable API |
 | HT_REPORTING_OPA_ENDPOINT | Represents the endpoint for polling OPA config file e.g. http://opa.traceableai:8181/ |
 | HT_REPORTING_OPA_POLL_PERIOD_SECONDS | Poll period in seconds to query OPA service |
+| HT_REPORTING_OPA_ENABLED | When `true` Open Policy Agent evaluation is enabled to block request |
 | HT_DATA_CAPTURE_HTTP_HEADERS_REQUEST | When `false` it disables the capture for the request in a client/request operation |
 | HT_DATA_CAPTURE_HTTP_HEADERS_RESPONSE | When `false` it disables the capture for the response in a client/request operation |
 | HT_DATA_CAPTURE_HTTP_BODY_REQUEST | When `false` it disables the capture for the request in a client/request operation |
@@ -21,3 +22,4 @@ Agents can be configured using environment variables:
 | HT_DATA_CAPTURE_RPC_METADATA_RESPONSE | When `false` it disables the capture for the response in a client/request operation |
 | HT_DATA_CAPTURE_RPC_BODY_REQUEST | When `false` it disables the capture for the request in a client/request operation |
 | HT_DATA_CAPTURE_RPC_BODY_RESPONSE | When `false` it disables the capture for the response in a client/request operation |
+| HT_DATA_CAPTURE_BODY_MAX_SIZE_BYTES | Maximum size of captured body in bytes. Default should be 131_072 (128 KiB). |
