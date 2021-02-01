@@ -24,6 +24,9 @@ message AgentConfig {
 
     // propagation_formats list the supported propagation formats
     repeated PropagationFormat propagation_formats = 4;
+
+    // when `false`, disables the agent
+    google.protobuf.BoolValue enabled = 5;
 }
 
 // Reporting covers the options related to the mechanics for sending data to the
