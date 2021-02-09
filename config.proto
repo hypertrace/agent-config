@@ -101,6 +101,6 @@ enum PropagationFormat {
 
 // JavaAgent has the configs specific to javaagent
 message JavaAgent {
-    // filter_jar_paths is the list of path to opa filter jars, separated by `,`
+    // filter_jar_paths is the list of path to filter jars, separated by `,`
     repeated google.protobuf.StringValue filter_jar_paths = 1;
 }
