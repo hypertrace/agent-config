@@ -92,7 +92,7 @@ Parse PROTO_FILE and generate output document`)
 		os.Exit(1)
 	}
 
-	allTypes, rootTypes := getTypes(pf.Messages)
+	allTypes, rootTypes, enumTypes := getTypes(pf)
 
 	for _, _type := range rootTypes {
 		err = writeHeaders(w)
@@ -100,7 +100,7 @@ Parse PROTO_FILE and generate output document`)
 			fmt.Printf("File to write headers %v \n", err)
 			os.Exit(1)
 		}
-		err = writeRows(w, _type, allTypes, "HT_")
+		err = writeRows(w, _type, allTypes, enumTypes, "HT_")
 		if err != nil {
 			fmt.Printf("File to write rows %v \n", err)
 			os.Exit(1)
@@ -143,16 +143,25 @@ func readTemplate(filepath string) ([]byte, error) {
 
 // readTypes read all types in the proto file to be able to list them and identify those who are
 // not part of another type (as a field).
-func getTypes(messages []pbparser.MessageElement) (map[string]pbparser.MessageElement, map[string]pbparser.MessageElement) {
+func getTypes(pf pbparser.ProtoFile) (
+	map[string]pbparser.MessageElement,
+	map[string]pbparser.MessageElement,
+	map[string]pbparser.EnumElement,
+) {
 	allTypes := map[string]pbparser.MessageElement{}
 	rootTypes := map[string]pbparser.MessageElement{}
+	enumTypes := map[string]pbparser.EnumElement{}
 
-	for _, m := range messages {
+	for _, m := range pf.Messages {
 		allTypes[m.Name] = m
 		rootTypes[m.Name] = m
 	}
 
-	for _, m := range messages {
+	for _, e := range pf.Enums {
+		enumTypes[e.Name] = e
+	}
+
+	for _, m := range pf.Messages {
 		for _, mf := range m.Fields {
 			if namedType, ok := mf.Type.(pbparser.NamedDataType); ok {
 				// if a type is used as a field type in another message then it is not a root type
@@ -161,7 +170,7 @@ func getTypes(messages []pbparser.MessageElement) (map[string]pbparser.MessageEl
 		}
 	}
 
-	return allTypes, rootTypes
+	return allTypes, rootTypes, enumTypes
 }
 
 func writeHeaders(w io.StringWriter) error {
@@ -173,9 +182,37 @@ func writeHeaders(w io.StringWriter) error {
 }
 
 // writeRows write the env var rows in the table
-func writeRows(w io.StringWriter, m pbparser.MessageElement, types map[string]pbparser.MessageElement, prefix string) error {
+func writeRows(
+	w io.StringWriter,
+	m pbparser.MessageElement,
+	types map[string]pbparser.MessageElement,
+	enumTypes map[string]pbparser.EnumElement,
+	prefix string,
+) error {
 	for _, mf := range m.Fields {
-		if strings.HasPrefix(mf.Type.Name(), "google.protobuf.") { // i.e. it is scalar
+		if mf.Label == "repeated" {
+			documentation := strings.Trim(toFieldDescription(mf.Name, mf.Documentation), ".")
+			if e, ok := enumTypes[mf.Type.Name()]; ok { // isEnum
+				examples := []string{}
+				for _, ev := range e.EnumConstants[0:2] { // limit example to the first two
+					examples = append(examples, ev.Name)
+				}
+				documentation += fmt.Sprintf(
+					" e.g. `%s=\"%s\"`",
+					prefix+toEnvFormat(mf.Name),
+					strings.Join(examples, ","),
+				)
+			}
+
+			_, err := w.WriteString(fmt.Sprintf(
+				"| %s | %s. |\n",
+				prefix+toEnvFormat(mf.Name),
+				documentation,
+			))
+			if err != nil {
+				return err
+			}
+		} else if strings.HasPrefix(mf.Type.Name(), "google.protobuf.") { // i.e. it is scalar
 			_, err := w.WriteString(fmt.Sprintf(
 				"| %s | %s |\n",
 				prefix+toEnvFormat(mf.Name),
@@ -185,7 +222,7 @@ func writeRows(w io.StringWriter, m pbparser.MessageElement, types map[string]pb
 				return err
 			}
 		} else if _, ok := mf.Type.(pbparser.NamedDataType); ok {
-			err := writeRows(w, types[mf.Type.Name()], types, prefix+toEnvFormat(mf.Name)+"_")
+			err := writeRows(w, types[mf.Type.Name()], types, enumTypes, prefix+toEnvFormat(mf.Name)+"_")
 			if err != nil {
 				return err
 			}
