@@ -27,6 +27,9 @@ message AgentConfig {
 
     // when `false`, disables the agent
     google.protobuf.BoolValue enabled = 5;
+
+    // javaagent has the configs specific to javaagent
+    JavaAgent javaagent = 6;
 }
 
 // Reporting covers the options related to the mechanics for sending data to the
@@ -94,4 +97,10 @@ enum PropagationFormat {
     // W3C Propagation format
     // see https://www.w3.org/TR/trace-context/
     TRACECONTEXT = 1;
+}
+
+// JavaAgent has the configs specific to javaagent
+message JavaAgent {
+    // filter_jar_paths is the list of path to filter jars, separated by `,`
+    repeated google.protobuf.StringValue filter_jar_paths = 1;
 }

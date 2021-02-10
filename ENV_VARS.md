@@ -25,3 +25,4 @@ Agents can be configured using environment variables:
 | HT_DATA_CAPTURE_BODY_MAX_SIZE_BYTES | Maximum size of captured body in bytes. Default should be 131_072 (128 KiB). |
 | HT_PROPAGATION_FORMATS | List the supported propagation formats e.g. `HT_PROPAGATION_FORMATS="B3,TRACECONTEXT"`. |
 | HT_ENABLED | When `false`, disables the agent |
+| HT_JAVAAGENT_FILTER_JAR_PATHS | Is the list of path to filter jars, separated by `,` |
