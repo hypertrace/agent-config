@@ -8,6 +8,11 @@ help: ## Prints this help.
 lint: ## Lints the proto files.
 	protolint config.proto
 
+generate-code-go: # generates config object for Go
+	@protoc --go_out=paths=source_relative:. config.proto
+
+generate-code: generate-code-go
+
 generate-env-vars: ## Generates the ENV_VARS.md with all environment variables.
 	docker build -t hypertrace/agent-config/env-vars-generator tools/env-vars-generator
 	docker run \
