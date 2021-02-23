@@ -46,6 +46,9 @@ message Reporting {
 
     // opa describes the setting related to the Open Policy Agent
     Opa opa = 4;
+
+    // reporter type - zipkin or otlp. Defaults to Zipkin, in the future it will change to otlp.
+    google.protobuf.StringValue reporter_type = 5;
 }
 
 // Opa covers the options related to the mechanics for getting Open Policy Agent configuration file.
