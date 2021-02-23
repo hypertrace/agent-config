@@ -1,4 +1,4 @@
-.PHONY: default help
+.PHONY: default help lint generate-env-vars init-git-submodule
 
 default: help
 
@@ -8,7 +8,7 @@ help: ## Prints this help.
 lint: ## Lints the proto files.
 	protolint config.proto
 
-generate-env-vars: ## Generates the ENV_VARS.md with all environment variables.
+generate-env-vars: init-git-submodule ## Generates the ENV_VARS.md with all environment variables.
 	docker build -t hypertrace/agent-config/env-vars-generator tools/env-vars-generator
 	docker run \
 	-v $(PWD)/ENV_VARS.md:/usr/local/ENV_VARS.md \
@@ -16,3 +16,6 @@ generate-env-vars: ## Generates the ENV_VARS.md with all environment variables.
 	hypertrace/agent-config/env-vars-generator \
 	-o /usr/local/ENV_VARS.md \
 	/usr/local/config.proto
+
+init-git-submodule:
+	git submodule update --init
