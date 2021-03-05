@@ -30,6 +30,8 @@ message AgentConfig {
 
     // javaagent has the configs specific to javaagent
     JavaAgent javaagent = 6;
+
+    map<string, string> resources = 7;
 }
 
 // Reporting covers the options related to the mechanics for sending data to the
@@ -49,6 +51,7 @@ message Reporting {
 
     // reporter type. Defaults to zipkin, in the future it will change to otlp.
     TraceReporterType trace_reporter_type = 5;
+
 }
 
 // Opa covers the options related to the mechanics for getting Open Policy Agent configuration file.
