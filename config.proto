@@ -30,6 +30,9 @@ message AgentConfig {
 
     // javaagent has the configs specific to javaagent
     JavaAgent javaagent = 6;
+
+    // resource_attributes map define the static list of resources which is configured on the tracer
+    map<string, string> resource_attributes = 7;
 }
 
 // Reporting covers the options related to the mechanics for sending data to the
