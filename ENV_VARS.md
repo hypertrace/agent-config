@@ -5,25 +5,25 @@
 
 Agents can be configured using environment variables:
 
-| System property| Environment Variable | Description |
+| System property| Environment variable | Description |
 |----------------|----------------------|-------------|
-| ht.service.name | HT_SERVICE_NAME | Identifies the service/process running e.g. "my service" |
-| ht.reporting.endpoint | HT_REPORTING_ENDPOINT | Represents the endpoint for reporting the traces e.g. http://api.traceable.ai:9411/api/v2/spans |
-| ht.reporting.secure | HT_REPORTING_SECURE | When `true`, connects to endpoints over TLS. |
-| ht.reporting.token | HT_REPORTING_TOKEN | User specific token to access Traceable API |
-| ht.reporting.trace.reporter.type | HT_REPORTING_TRACE_TYPE | Use ZIPKIN or OTLP, default is ZIPKIN |
-| ht.reporting.opa.endpoint | HT_REPORTING_OPA_ENDPOINT | Represents the endpoint for polling OPA config file e.g. http://opa.traceableai:8181/ |
-| ht.reporting.opa.poll.period.seconds | HT_REPORTING_OPA_POLL_PERIOD_SECONDS | Poll period in seconds to query OPA service |
-| ht.reporting.opa.enabled | HT_REPORTING_OPA_ENABLED | When `true` Open Policy Agent evaluation is enabled to block request |
-| ht.data.capture.http.headers.request | HT_DATA_CAPTURE_HTTP_HEADERS_REQUEST | When `false` it disables the capture for the request in a client/request operation |
-| ht.data.capture.http.headers.response | HT_DATA_CAPTURE_HTTP_HEADERS_RESPONSE | When `false` it disables the capture for the response in a client/request operation |
-| ht.data.capture.http.body.request | HT_DATA_CAPTURE_HTTP_BODY_REQUEST | When `false` it disables the capture for the request in a client/request operation |
-| ht.data.capture.http.body.response | HT_DATA_CAPTURE_HTTP_BODY_RESPONSE | When `false` it disables the capture for the response in a client/request operation |
-| ht.data.capture.rpc.metadata.request | HT_DATA_CAPTURE_RPC_METADATA_REQUEST | When `false` it disables the capture for the request in a client/request operation |
-| ht.data.capture.rpc.metadata.response | HT_DATA_CAPTURE_RPC_METADATA_RESPONSE | When `false` it disables the capture for the response in a client/request operation |
-| ht.data.capture.rpc.body.request | HT_DATA_CAPTURE_RPC_BODY_REQUEST | When `false` it disables the capture for the request in a client/request operation |
-| ht.data.capture.rpc.body.response | HT_DATA_CAPTURE_RPC_BODY_RESPONSE | When `false` it disables the capture for the response in a client/request operation |
-| ht.data.capture.body.max.size.bytes | HT_DATA_CAPTURE_BODY_MAX_SIZE_BYTES | Maximum size of captured body in bytes. Default should be 131_072 (128 KiB). |
-| ht.propagation.formats | HT_PROPAGATION_FORMATS | List the supported propagation formats e.g. `HT_PROPAGATION_FORMATS="B3,TRACECONTEXT"`. |
-| ht.enabled | HT_ENABLED | When `false`, disables the agent |
-| ht.javaagent.filter.jar.paths | HT_JAVAAGENT_FILTER_JAR_PATHS | Is the list of path to filter jars, separated by `,`. |
+| `ht.service.name` | HT_SERVICE_NAME | Identifies the service/process running e.g. "my service" |
+| `ht.reporting.endpoint` | HT_REPORTING_ENDPOINT | Represents the endpoint for reporting the traces e.g. http://api.traceable.ai:9411/api/v2/spans |
+| `ht.reporting.secure` | HT_REPORTING_SECURE | When `true`, connects to endpoints over TLS. |
+| `ht.reporting.token` | HT_REPORTING_TOKEN | User specific token to access Traceable API |
+| `ht.reporting.trace.reporter.type` | HT_REPORTING_TRACE_TYPE | Use ZIPKIN or OTLP, default is ZIPKIN |
+| `ht.reporting.opa.endpoint` | HT_REPORTING_OPA_ENDPOINT | Represents the endpoint for polling OPA config file e.g. http://opa.traceableai:8181/ |
+| `ht.reporting.opa.poll.period.seconds` | HT_REPORTING_OPA_POLL_PERIOD_SECONDS | Poll period in seconds to query OPA service |
+| `ht.reporting.opa.enabled` | HT_REPORTING_OPA_ENABLED | When `true` Open Policy Agent evaluation is enabled to block request |
+| `ht.data.capture.http.headers.request` | HT_DATA_CAPTURE_HTTP_HEADERS_REQUEST | When `false` it disables the capture for the request in a client/request operation |
+| `ht.data.capture.http.headers.response` | HT_DATA_CAPTURE_HTTP_HEADERS_RESPONSE | When `false` it disables the capture for the response in a client/request operation |
+| `ht.data.capture.http.body.request` | HT_DATA_CAPTURE_HTTP_BODY_REQUEST | When `false` it disables the capture for the request in a client/request operation |
+| `ht.data.capture.http.body.response` | HT_DATA_CAPTURE_HTTP_BODY_RESPONSE | When `false` it disables the capture for the response in a client/request operation |
+| `ht.data.capture.rpc.metadata.request` | HT_DATA_CAPTURE_RPC_METADATA_REQUEST | When `false` it disables the capture for the request in a client/request operation |
+| `ht.data.capture.rpc.metadata.response` | HT_DATA_CAPTURE_RPC_METADATA_RESPONSE | When `false` it disables the capture for the response in a client/request operation |
+| `ht.data.capture.rpc.body.request` | HT_DATA_CAPTURE_RPC_BODY_REQUEST | When `false` it disables the capture for the request in a client/request operation |
+| `ht.data.capture.rpc.body.response` | HT_DATA_CAPTURE_RPC_BODY_RESPONSE | When `false` it disables the capture for the response in a client/request operation |
+| `ht.data.capture.body.max.size.bytes` | HT_DATA_CAPTURE_BODY_MAX_SIZE_BYTES | Maximum size of captured body in bytes. Default should be 131_072 (128 KiB). |
+| `ht.propagation.formats` | HT_PROPAGATION_FORMATS | List the supported propagation formats e.g. `HT_PROPAGATION_FORMATS="B3,TRACECONTEXT"`. |
+| `ht.enabled` | HT_ENABLED | When `false`, disables the agent |
+| `ht.javaagent.filter.jar.paths` | HT_JAVAAGENT_FILTER_JAR_PATHS | Is the list of path to filter jars, separated by `,`. |
