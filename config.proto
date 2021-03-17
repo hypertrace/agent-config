@@ -116,6 +116,10 @@ enum TraceReporterType {
     // OpenTelemetry protobuf reporting format.
     // see https://github.com/open-telemetry/opentelemetry-proto
     OTLP = 1;
+
+    // Jaeger-thrift exporter
+    // see https://github.com/jaegertracing/jaeger-idl
+    JAEGER_THRIFT = 2;
 }
 
 // JavaAgent has the configs specific to javaagent
