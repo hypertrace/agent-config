@@ -52,7 +52,8 @@ message Reporting {
     // opa describes the setting related to the Open Policy Agent
     Opa opa = 4;
 
-    // reporter type for traces. ZIPKIN or OTLP
+    // reporter type for traces.
+    // Agents should set a default type as ZIPKIN or OTLP while creating default config
     TraceReporterType trace_reporter_type = 5;
 }
 
@@ -111,7 +112,7 @@ enum PropagationFormat {
 enum TraceReporterType {
 
     // Default to none
-    TRACE_REPORTER_TYPE_UNSPECIFIED = 0;
+    UNSPECIFIED = 0;
 
     // Zipkin protobuf reporting format.
     // see https://github.com/openzipkin/zipkin-api
