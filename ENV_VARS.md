@@ -26,3 +26,4 @@ Agents can be configured using environment variables:
 | HT_PROPAGATION_FORMATS | List the supported propagation formats e.g. `HT_PROPAGATION_FORMATS="B3,TRACECONTEXT"`. |
 | HT_ENABLED | When `false`, disables the agent |
 | HT_JAVAAGENT_FILTER_JAR_PATHS | Is the list of path to filter jars, separated by `,`. |
+| HT_CUSTOM_DATA_CAPTURE_ENDPOINTS | List the custom endpoints with respective data capture rules. |
