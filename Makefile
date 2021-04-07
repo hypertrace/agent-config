@@ -7,6 +7,7 @@ help: ## Prints this help.
 
 lint: ## Lints the proto files.
 	protolint config.proto
+	protolint config_service.proto
 
 generate-env-vars: init-git-submodule ## Generates the ENV_VARS.md with all environment variables.
 	docker build -t hypertrace/agent-config/env-vars-generator tools/env-vars-generator

@@ -1,0 +1,64 @@
+syntax = "proto3";
+
+package org.hypertrace.agent.config;
+
+import "google/protobuf/wrappers.proto";
+
+option go_package = "github.com/hypertrace/goagent/config";
+option java_package = "org.hypertrace.agent.config";
+
+import "config.proto";
+
+service ConfigurationService {
+  // InitialConfiguration returns the initial configuration for an agent.
+  // It should be called by agents only if config file is not specified by user.
+  rpc InitialConfiguration(InitialConfigurationRequest) returns (InitialConfigurationResponse) {}
+
+  // UpdateConfiguration returns the configs that can be dynamically updated in agents
+  rpc UpdateConfiguration(UpdateConfigurationRequest) returns (UpdateConfigurationResponse) {}
+}
+
+// InitialConfigurationRequest has information about the agent
+message InitialConfigurationRequest {
+  // hostname on which the agent is running
+  string hostname = 1;
+  // if running in a containerized environment the container id in which the agent is running
+  string container_id = 2;
+  // a map of identifiers the configuration service can use to apply a specific configuration to an agent
+  map<string, string> identifiers = 3;
+}
+
+// InitialConfigurationResponse has the initial config that will be used by agent at startup
+message InitialConfigurationResponse {
+  // the timestamp associated with the configuration. This is the time
+  // the configuration was persisted, not when it was sent.  The timestamp
+  // should only change when the persisted configuration has changed.
+  google.protobuf.Int32Value timestamp = 1;
+  // configuration to be applied to the agent at initialization
+  AgentConfig agent_config = 2;
+}
+
+message UpdateConfigurationRequest {
+  // the timestamp of the current configuration
+  google.protobuf.Int32Value timestamp = 1;
+}
+
+// not all configuration can be changed after the agent has started
+// these are the properties which can be dynamically configured
+// without restarting the agent
+message UpdateConfigurationResponse {
+  // the timestamp associated with the configuration
+  // if there are no configuration change, this value will
+  // equal UpdateConfigurationRequest.timestamp
+  google.protobuf.Int32Value timestamp = 1;
+  // enable or disable the agent.  This will not remove
+  // any instrumentation when set to false, but the agent
+  // will turn stop reporting spans, metrics etc
+  google.protobuf.BoolValue enabled = 2;
+  // data capture configuration which applies to all agents
+  DataCapture data_capture = 3;
+  // java agent specific configuration
+  JavaAgent java_agent = 4;
+  // custom_data_capture_endpoints are the custom endpoints with respective data capture rules
+  repeated CustomDataCaptureEndpoint custom_data_capture_endpoints = 5;
+}
