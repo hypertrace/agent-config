@@ -53,7 +53,6 @@ message Reporting {
     Opa opa = 4;
 
     // reporter type for traces.
-    // Agents should set a default type as ZIPKIN or OTLP while creating default config
     TraceReporterType trace_reporter_type = 5;
 }
 
@@ -111,7 +110,7 @@ enum PropagationFormat {
 // TraceReporterType represents the reporting format for trace data.
 enum TraceReporterType {
 
-    // Default to none
+    // Default to none. Agent will use it's default reporting type
     UNSPECIFIED = 0;
 
     // Zipkin protobuf reporting format.
