@@ -19,8 +19,11 @@ message AgentConfig {
     // reporting holds the reporting settings for the agent
     Reporting reporting = 2;
 
-    // data_capture describes the data being captured by instrumentation
-    DataCapture data_capture = 3;
+    // data_capture lists the rules for data being captured by instrumentation.
+    // The first rule in config that matches for a path should be used if multiple rules match.
+    // Therefore the default rule (if present) should be the last rule.
+    // If no default rule is given, the default behaviour should be to allow data capture for all elements
+    repeated DataCapture data_capture = 3;
 
     // propagation_formats list the supported propagation formats
     repeated PropagationFormat propagation_formats = 4;
@@ -33,9 +36,6 @@ message AgentConfig {
 
     // resource_attributes map define the static list of resources which is configured on the tracer
     map<string, string> resource_attributes = 7;
-
-    // custom_data_capture_endpoints list the custom endpoints with respective data capture rules
-    repeated CustomDataCaptureEndpoint custom_data_capture_endpoints = 8;
 }
 
 // Reporting covers the options related to the mechanics for sending data to the
@@ -81,7 +81,7 @@ message Message {
     google.protobuf.BoolValue response = 2;
 }
 
-// DataCapture describes the elements to be captured by the agent instrumentation
+// DataCapture describes the elements to be captured by the agent instrumentation for paths that match this rule.
 message DataCapture {
     // http_headers enables/disables the capture of the request/response headers in HTTP
     Message http_headers = 1;
@@ -97,6 +97,10 @@ message DataCapture {
 
     // maximum size of captured body in bytes. Default should be 131_072 (128 KiB).
     google.protobuf.Int32Value body_max_size_bytes = 5;
+
+    // path_pattern is the path to match for this data capture rule.
+    // If path_pattern is not given, this rule will apply to all paths as the default
+    google.protobuf.StringValue path_pattern = 6;
 }
 
 // PropagationFormat represents the propagation formats supported by agents
@@ -129,18 +133,4 @@ enum TraceReporterType {
 message JavaAgent {
     // filter_jar_paths is the list of path to filter jars, separated by `,`
     repeated google.protobuf.StringValue filter_jar_paths = 1;
-}
-
-// CustomDataCaptureEndpoint represents a custom data capture rule for an endpoint that matches
-// the given url pattern and host header
-message CustomDataCaptureEndpoint {
-
-    // data_capture describes the data being captured by instrumentation for this endpoint
-    DataCapture data_capture = 1;
-
-    // url_pattern describes the url pattern to match for this endpoint
-    google.protobuf.StringValue url_pattern = 2;
-
-    // host_header describes the host header to match for this endpoint
-    google.protobuf.StringValue host_header = 3;
 }

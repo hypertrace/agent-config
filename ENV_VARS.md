@@ -14,16 +14,7 @@ Agents can be configured using environment variables:
 | HT_REPORTING_OPA_ENDPOINT | Represents the endpoint for polling OPA config file e.g. http://opa.traceableai:8181/ |
 | HT_REPORTING_OPA_POLL_PERIOD_SECONDS | Poll period in seconds to query OPA service |
 | HT_REPORTING_OPA_ENABLED | When `true` Open Policy Agent evaluation is enabled to block request |
-| HT_DATA_CAPTURE_HTTP_HEADERS_REQUEST | When `false` it disables the capture for the request in a client/request operation |
-| HT_DATA_CAPTURE_HTTP_HEADERS_RESPONSE | When `false` it disables the capture for the response in a client/request operation |
-| HT_DATA_CAPTURE_HTTP_BODY_REQUEST | When `false` it disables the capture for the request in a client/request operation |
-| HT_DATA_CAPTURE_HTTP_BODY_RESPONSE | When `false` it disables the capture for the response in a client/request operation |
-| HT_DATA_CAPTURE_RPC_METADATA_REQUEST | When `false` it disables the capture for the request in a client/request operation |
-| HT_DATA_CAPTURE_RPC_METADATA_RESPONSE | When `false` it disables the capture for the response in a client/request operation |
-| HT_DATA_CAPTURE_RPC_BODY_REQUEST | When `false` it disables the capture for the request in a client/request operation |
-| HT_DATA_CAPTURE_RPC_BODY_RESPONSE | When `false` it disables the capture for the response in a client/request operation |
-| HT_DATA_CAPTURE_BODY_MAX_SIZE_BYTES | Maximum size of captured body in bytes. Default should be 131_072 (128 KiB). |
+| HT_DATA_CAPTURE | Lists the rules for data being captured by instrumentation. The first rule in config that matches for a path should be used if multiple rules match. Therefore the default rule (if present) should be the last rule. If no default rule is given, the default behaviour should be to allow data capture for all elements. |
 | HT_PROPAGATION_FORMATS | List the supported propagation formats e.g. `HT_PROPAGATION_FORMATS="B3,TRACECONTEXT"`. |
 | HT_ENABLED | When `false`, disables the agent |
 | HT_JAVAAGENT_FILTER_JAR_PATHS | Is the list of path to filter jars, separated by `,`. |
-| HT_CUSTOM_DATA_CAPTURE_ENDPOINTS | List the custom endpoints with respective data capture rules. |
