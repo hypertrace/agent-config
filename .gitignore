@@ -3,6 +3,3 @@
 .vscode
 .idea
 *~
-
-# Generated code
-**/*.pb.go
