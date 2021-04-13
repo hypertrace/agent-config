@@ -6,9 +6,3 @@ plugins:
   - name: go-grpc
     out: gen/go
     opt: paths=source_relative
-  - name: grpc-gateway
-    out: gen/go
-    opt:
-      - paths=source_relative
-      - generate_unbound_methods=true
-      - logtostderr=true

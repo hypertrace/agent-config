@@ -5,6 +5,8 @@ build:
 lint:
   use:
     - DEFAULT
+  except:
+    - ENUM_VALUE_PREFIX
 breaking:
   use:
     - PACKAGE

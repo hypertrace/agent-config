@@ -4,7 +4,7 @@ package hypertrace.agent.config.v1;
 
 import "google/protobuf/wrappers.proto";
 
-option go_package = "github.com/hypertrace/goagent/config/v1";
+option go_package = "github.com/hypertrace/agent-config/gen/go/hypertrace/agent/config/v1";
 option java_package = "org.hypertrace.agent.config.v1";
 
 // AgentConfig covers the config for agents.

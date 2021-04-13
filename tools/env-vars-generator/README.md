@@ -1,6 +1,6 @@
 # Env vars generator
 
-This tool allows us to generate the [list of env vars](../../ENV_VARS.md) from the [config.proto](../../proto/org/hypertrace/agent/config/v1/config.proto) file.
+This tool allows us to generate the [list of env vars](../../ENV_VARS.md) from the [config.proto](../../proto/hypertrace/agent/config/v1/config.proto) file.
 
 ## Usage
 
