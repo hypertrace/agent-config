@@ -204,6 +204,8 @@ func writeRows(
 					prefix+toEnvFormat(mf.Name),
 					strings.Join(examples, ","),
 				)
+			} else if strings.HasPrefix(mf.Type.Name(), "google.protobuf.") {
+				documentation += ". The values should be separated by `,`"
 			}
 
 			_, err := w.WriteString(fmt.Sprintf(
