@@ -17,7 +17,7 @@ generate: ## generates code for all languages
 	buf generate
 
 clean: ## Cleans all build generated artifacts
-	rm -rf gen/
+	rm -rf go/
 
 install:
 	go install -mod=mod \

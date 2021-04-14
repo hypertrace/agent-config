@@ -194,8 +194,10 @@ func writeRows(
 			documentation := strings.Trim(toFieldDescription(mf.Name, mf.Documentation), ".")
 			if e, ok := enumTypes[mf.Type.Name()]; ok { // isEnum
 				examples := []string{}
-				for _, ev := range e.EnumConstants[1:3] { // limit example to the first two, excluding unspecified
-					examples = append(examples, ev.Name)
+				for _, ev := range e.EnumConstants[0:2] { // limit example to the first two, excluding unspecified
+					if !strings.Contains(ev.Name, "UNSPECIFIED") {
+						examples = append(examples, ev.Name)
+					}
 				}
 				documentation += fmt.Sprintf(
 					" e.g. `%s=\"%s\"`",
