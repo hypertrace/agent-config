@@ -2,4 +2,7 @@ module github.com/hypertrace/agent-config
 
 go 1.16
 
-replace github.com/hypertrace/agent-config => ./go
+require (
+	github.com/golang/protobuf v1.5.2
+	google.golang.org/protobuf v1.26.0
+)
