@@ -1,4 +1,4 @@
-module github.com/hypertrace/agent-config/v1
+module github.com/hypertrace/agent-config/hypertrace/agent/config/v1
 
 go 1.16
 

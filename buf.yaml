@@ -5,9 +5,11 @@ build:
 lint:
   use:
     - DEFAULT
-  except:
-    - ENUM_VALUE_PREFIX
-    - ENUM_ZERO_VALUE_SUFFIX
+  ignore_only:
+    ENUM_VALUE_PREFIX:
+      - hypertrace/agent/config/v1/config.proto
+    ENUM_ZERO_VALUE_SUFFIX:
+      - hypertrace/agent/config/v1/config.proto
 breaking:
   use:
     - PACKAGE
