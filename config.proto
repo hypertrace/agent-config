@@ -121,8 +121,8 @@ enum TraceReporterType {
     // see https://github.com/open-telemetry/opentelemetry-proto
     OTLP = 2;
 
-    // Console reporting
-    CONSOLE = 3;
+    // Logging reporting format
+    LOGGING = 3;
 }
 
 // JavaAgent has the configs specific to javaagent
