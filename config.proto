@@ -47,13 +47,17 @@ message Reporting {
     google.protobuf.BoolValue secure = 2;
 
     // user specific token to access Traceable API
-    google.protobuf.StringValue token = 3;
+    google.protobuf.StringValue token = 3 [deprecated = true];
 
     // opa describes the setting related to the Open Policy Agent
     Opa opa = 4;
 
     // reporter type for traces.
     TraceReporterType trace_reporter_type = 5;
+
+    // metadata is a key:value map that is included in the reporting request e.g. 
+    // headers in OTLP reporter or HTTP headers for zipkin.
+    map<string, string> metadata = 6;
 }
 
 // Opa covers the options related to the mechanics for getting Open Policy Agent configuration file.
