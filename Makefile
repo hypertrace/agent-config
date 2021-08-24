@@ -8,11 +8,15 @@ help: ## Prints this help.
 lint: ## Lints the proto files.
 	protolint config.proto
 
+generate: ## Generates proto code
+	cd proto; buf generate
+
 generate-env-vars: init-git-submodule ## Generates the ENV_VARS.md with all environment variables.
 	docker build -t hypertrace/agent-config/env-vars-generator tools/env-vars-generator
+	touch $(PWD)/ENV_VARS.md # makes sure this is created as a file and not as a directory
 	docker run \
 	-v $(PWD)/ENV_VARS.md:/usr/local/ENV_VARS.md \
-	-v $(PWD)/config.proto:/usr/local/config.proto \
+	-v $(PWD)/proto/org/hypertrace/agent/config/v1/config.proto:/usr/local/config.proto \
 	hypertrace/agent-config/env-vars-generator \
 	-o /usr/local/ENV_VARS.md \
 	/usr/local/config.proto

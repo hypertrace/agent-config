@@ -1,11 +1,11 @@
 syntax = "proto3";
 
-package org.hypertrace.agent.config;
+package org.hypertrace.agent.config.v1;
 
 import "google/protobuf/wrappers.proto";
 
-option go_package = "github.com/hypertrace/goagent/config";
-option java_package = "org.hypertrace.agent.config";
+option go_package = "github.com/hypertrace/agent-config/v1";
+option java_package = "org.hypertrace.agent.config.v1";
 
 // AgentConfig covers the config for agents.
 // The config uses wrappers for primitive types to allow nullable values.
