@@ -1,17 +1,17 @@
 version: v1beta1
 build:
   roots:
-    - proto
+    - .
 lint:
   use:
     - DEFAULT
   ignore_only:
     ENUM_VALUE_PREFIX:
-      - config/v1/config.proto
+      - org/hypertrace/agent/config/v1/config.proto
     ENUM_ZERO_VALUE_SUFFIX:
-      - config/v1/config.proto
+      - org/hypertrace/agent/config/v1/config.proto
     PACKAGE_DIRECTORY_MATCH:
-      - config/v1/config.proto
+      - org/hypertrace/agent/config/v1/config.proto
 breaking:
   use:
     - PACKAGE

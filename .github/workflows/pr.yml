@@ -14,4 +14,4 @@ jobs:
           version: 0.36.0
 
       - name: Lint proto
-        run: make lint
+        run: make lint-proto

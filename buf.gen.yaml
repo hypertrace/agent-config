@@ -1,8 +1,0 @@
-version: v1beta1
-plugins:
-  - name: go
-    out: go
-    opt: module=github.com/hypertrace/agent-config
-  - name: go-grpc
-    out: go
-    opt: module=github.com/hypertrace/agent-config
