@@ -1,18 +1,10 @@
 syntax = "proto3";
 
-<<<<<<< HEAD:proto/hypertrace/agent/config/v1/config.proto
 package hypertrace.agent.config.v1;
 
 import "google/protobuf/wrappers.proto";
 
 option go_package = "github.com/hypertrace/agent-config/gen/go/hypertrace/agent/config/v1";
-=======
-package org.hypertrace.agent.config.v1;
-
-import "google/protobuf/wrappers.proto";
-
-option go_package = "github.com/hypertrace/agent-config/gen/go/org/hypertrace/agent/config/v1";
->>>>>>> chore: adds go generated code from proto.:proto/org/hypertrace/agent/config/v1/config.proto
 option java_package = "org.hypertrace.agent.config.v1";
 
 // AgentConfig covers the config for agents.
