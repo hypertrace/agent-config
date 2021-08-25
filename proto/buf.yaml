@@ -7,11 +7,9 @@ lint:
     - DEFAULT
   ignore_only:
     ENUM_VALUE_PREFIX:
-      - org/hypertrace/agent/config/v1/config.proto
+      - hypertrace/agent/config/v1/config.proto
     ENUM_ZERO_VALUE_SUFFIX:
-      - org/hypertrace/agent/config/v1/config.proto
-    PACKAGE_DIRECTORY_MATCH:
-      - org/hypertrace/agent/config/v1/config.proto
+      - hypertrace/agent/config/v1/config.proto
 breaking:
   use:
     - PACKAGE

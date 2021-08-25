@@ -6,7 +6,7 @@ help: ## Prints this help.
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-18s\033[0m %s\n", $$1, $$2}'
 
 clean: ## Cleans all build generated artifacts
-	find . -type f -name '*.pb.go' -exec rm {} +
+	rm -rf ./gen
 
 install:
 	go install -mod=mod \
@@ -21,7 +21,15 @@ breaking-proto:
 	$(MAKE) -C ./proto breaking
 
 generate-proto:
+	@# Generates pb struct
 	$(MAKE) -C ./proto generate
+	
+	@# Generates pb loaders
+	@SRC_DIR=$(PWD)/proto OUT_DIR=$(PWD)/gen/go \
+	$(MAKE) -C ./tools/go-generator
+
+	@# Runs go mod tidy for all modules
+	@find $(PWD)/gen/go \( -name vendor -o -name '[._].*' -o -name node_modules \) -prune -o -name go.mod -print | sed 's:/go.mod::' | xargs -I {} bash -c 'cd {}; go mod tidy'
 
 generate-env-vars: init-git-submodule ## Generates the ENV_VARS.md with all environment variables.
 	docker build -t hypertrace/agent-config/env-vars-generator tools/env-vars-generator
