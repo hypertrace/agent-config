@@ -36,7 +36,7 @@ generate-env-vars: init-git-submodule ## Generates the ENV_VARS.md with all envi
 	touch $(PWD)/ENV_VARS.md # makes sure this is created as a file and not as a directory
 	docker run \
 	-v $(PWD)/ENV_VARS.md:/usr/local/ENV_VARS.md \
-	-v $(PWD)/proto/org/hypertrace/agent/config/v1/config.proto:/usr/local/config.proto \
+	-v $(PWD)/proto/hypertrace/agent/config/v1/config.proto:/usr/local/config.proto \
 	hypertrace/agent-config/env-vars-generator \
 	-o /usr/local/ENV_VARS.md \
 	/usr/local/config.proto
