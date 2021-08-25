@@ -1,4 +1,4 @@
-.PHONY: default help lint generate-env-vars init-git-submodule breaking generate clean
+.PHONY: default help lint-proto generate-env-vars init-git-submodule breaking-proto generate-proto clean
 
 default: help
 
