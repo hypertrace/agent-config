@@ -122,7 +122,7 @@ func Load(opts ...LoadOption) *AgentConfig {
 		}
 	}
 
-	cfg.loadFromEnv(options.prefix, &options.defaultConfig)
+	cfg.loadFromEnv(options.prefix, options.defaultConfig)
 
 	return &cfg
 }
@@ -149,7 +149,7 @@ func LoadFromFile(configFile string, opts ...LoadOption) *AgentConfig {
 		log.Printf("config file %q does not exist.\n", absConfigFile)
 	}
 
-	cfg.loadFromEnv(options.prefix, &options.defaultConfig)
+	cfg.loadFromEnv(options.prefix, options.defaultConfig)
 
 	return &cfg
 }

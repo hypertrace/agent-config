@@ -2,14 +2,20 @@
 
 package v1
 
+import (
+	"log"
+
+	"google.golang.org/protobuf/proto"
+)
+
 type opts struct {
 	prefix        string
-	defaultConfig AgentConfig
+	defaultConfig *AgentConfig
 }
 
 var defaultOptions = opts{
 	prefix:        "HT_",
-	defaultConfig: AgentConfig{},
+	defaultConfig: &AgentConfig{},
 }
 
 type LoadOption func(o *opts)
@@ -20,8 +26,15 @@ func WithEnvPrefix(prefix string) LoadOption {
 	}
 }
 
-func WithDefaults(defaults AgentConfig) LoadOption {
+func WithDefaults(defaults *AgentConfig) LoadOption {
 	return func(o *opts) {
-		o.defaultConfig = defaults
+		// The reason why we clone the message instead of reusing the one passed by the user
+		// is because user might decide to change values in runtime and that is undesirable
+		// without a proper API.
+		var ok bool
+		o.defaultConfig, ok = proto.Clone(defaults).(*AgentConfig)
+		if !ok {
+			log.Fatal("failed to initialize config.")
+		}
 	}
 }

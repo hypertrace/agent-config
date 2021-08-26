@@ -11,5 +11,5 @@ func (x *AgentConfig) LoadFromEnv(opts ...LoadOption) {
 		opt(&options)
 	}
 
-	x.loadFromEnv(options.prefix, &options.defaultConfig)
+	x.loadFromEnv(options.prefix, options.defaultConfig)
 }
