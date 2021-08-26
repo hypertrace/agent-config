@@ -208,7 +208,11 @@ func writeLoaderForProtoFile(cmdDir, protoFilepath, outDir string) error {
 					c += fmt.Sprintf("    }\n\n")
 				} else {
 					c += fmt.Sprintf("    if x.%s == nil { x.%s = new(%s) }\n", fieldName, fieldName, namedType.Name())
-					c += fmt.Sprintf("    x.%s.loadFromEnv(prefix + \"%s_\", defaultValues.%s)\n", fieldName, envPrefix, fieldName)
+					c += fmt.Sprintf("    if defaultValues == nil {\n")
+					c += fmt.Sprintf("        x.%s.loadFromEnv(prefix + \"%s_\", nil)\n", fieldName, envPrefix)
+					c += fmt.Sprintf("    } else {\n")
+					c += fmt.Sprintf("        x.%s.loadFromEnv(prefix + \"%s_\", defaultValues.%s)\n", fieldName, envPrefix, fieldName)
+					c += fmt.Sprintf("    }\n\n")
 				}
 			} else if strings.HasPrefix(fieldType, "map") {
 				mapFields = append(mapFields, mf)

@@ -19,11 +19,21 @@ func (x *AgentConfig) loadFromEnv(prefix string, defaultValues *AgentConfig) {
 	if x.Reporting == nil {
 		x.Reporting = new(Reporting)
 	}
-	x.Reporting.loadFromEnv(prefix+"REPORTING_", defaultValues.Reporting)
+	if defaultValues == nil {
+		x.Reporting.loadFromEnv(prefix+"REPORTING_", nil)
+	} else {
+		x.Reporting.loadFromEnv(prefix+"REPORTING_", defaultValues.Reporting)
+	}
+
 	if x.DataCapture == nil {
 		x.DataCapture = new(DataCapture)
 	}
-	x.DataCapture.loadFromEnv(prefix+"DATA_CAPTURE_", defaultValues.DataCapture)
+	if defaultValues == nil {
+		x.DataCapture.loadFromEnv(prefix+"DATA_CAPTURE_", nil)
+	} else {
+		x.DataCapture.loadFromEnv(prefix+"DATA_CAPTURE_", defaultValues.DataCapture)
+	}
+
 	if rawVals, ok := getArrayStringEnv(prefix + "PROPAGATION_FORMATS"); ok {
 		vals := []PropagationFormat{}
 		for _, rawVal := range rawVals {
@@ -106,7 +116,12 @@ func (x *Reporting) loadFromEnv(prefix string, defaultValues *Reporting) {
 	if x.Opa == nil {
 		x.Opa = new(Opa)
 	}
-	x.Opa.loadFromEnv(prefix+"OPA_", defaultValues.Opa)
+	if defaultValues == nil {
+		x.Opa.loadFromEnv(prefix+"OPA_", nil)
+	} else {
+		x.Opa.loadFromEnv(prefix+"OPA_", defaultValues.Opa)
+	}
+
 	if rawVal, ok := getStringEnv(prefix + "TRACE_REPORTER_TYPE"); ok {
 		x.TraceReporterType = TraceReporterType(TraceReporterType_value[rawVal])
 	} else if x.TraceReporterType == TraceReporterType(0) && defaultValues != nil && defaultValues.TraceReporterType != TraceReporterType(0) {
@@ -178,19 +193,39 @@ func (x *DataCapture) loadFromEnv(prefix string, defaultValues *DataCapture) {
 	if x.HttpHeaders == nil {
 		x.HttpHeaders = new(Message)
 	}
-	x.HttpHeaders.loadFromEnv(prefix+"HTTP_HEADERS_", defaultValues.HttpHeaders)
+	if defaultValues == nil {
+		x.HttpHeaders.loadFromEnv(prefix+"HTTP_HEADERS_", nil)
+	} else {
+		x.HttpHeaders.loadFromEnv(prefix+"HTTP_HEADERS_", defaultValues.HttpHeaders)
+	}
+
 	if x.HttpBody == nil {
 		x.HttpBody = new(Message)
 	}
-	x.HttpBody.loadFromEnv(prefix+"HTTP_BODY_", defaultValues.HttpBody)
+	if defaultValues == nil {
+		x.HttpBody.loadFromEnv(prefix+"HTTP_BODY_", nil)
+	} else {
+		x.HttpBody.loadFromEnv(prefix+"HTTP_BODY_", defaultValues.HttpBody)
+	}
+
 	if x.RpcMetadata == nil {
 		x.RpcMetadata = new(Message)
 	}
-	x.RpcMetadata.loadFromEnv(prefix+"RPC_METADATA_", defaultValues.RpcMetadata)
+	if defaultValues == nil {
+		x.RpcMetadata.loadFromEnv(prefix+"RPC_METADATA_", nil)
+	} else {
+		x.RpcMetadata.loadFromEnv(prefix+"RPC_METADATA_", defaultValues.RpcMetadata)
+	}
+
 	if x.RpcBody == nil {
 		x.RpcBody = new(Message)
 	}
-	x.RpcBody.loadFromEnv(prefix+"RPC_BODY_", defaultValues.RpcBody)
+	if defaultValues == nil {
+		x.RpcBody.loadFromEnv(prefix+"RPC_BODY_", nil)
+	} else {
+		x.RpcBody.loadFromEnv(prefix+"RPC_BODY_", defaultValues.RpcBody)
+	}
+
 	if val, ok := getInt32Env(prefix + "BODY_MAX_SIZE_BYTES"); ok {
 		x.BodyMaxSizeBytes = &wrappers.Int32Value{Value: val}
 	} else if x.BodyMaxSizeBytes == nil {
