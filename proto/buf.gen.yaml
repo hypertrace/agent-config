@@ -2,7 +2,6 @@ version: v1beta1
 plugins:
   - name: go
     out: ../gen/go
-    opt: paths=source_relative
-  - name: go-grpc
-    out: ../gen/go
-    opt: paths=source_relative
+    opt:
+      - paths=import
+      - module=github.com/hypertrace/agent-config/gen/go

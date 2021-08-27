@@ -25,10 +25,10 @@ generate-proto:
 	$(MAKE) -C ./proto generate
 	
 	@# Generates pb loaders
-	@SRC_DIR=$(PWD)/proto OUT_DIR=$(PWD)/gen/go \
+	@ROOT=$(PWD)/proto OUT_DIR=$(PWD)/gen/go \
 	$(MAKE) -C ./tools/go-generator
 
-	@# Runs go mod tidy for all modules
+	@echo "Tidy generated modules."
 	@find $(PWD)/gen/go \( -name vendor -o -name '[._].*' -o -name node_modules \) -prune -o -name go.mod -print | sed 's:/go.mod::' | xargs -I {} bash -c 'cd {}; go mod tidy'
 
 generate-env-vars: init-git-submodule ## Generates the ENV_VARS.md with all environment variables.

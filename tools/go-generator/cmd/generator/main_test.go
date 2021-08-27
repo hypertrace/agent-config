@@ -61,3 +61,13 @@ func TestGetSubtypeFromMap(t *testing.T) {
 		assert.Equal(t, "string", vType)
 	}
 }
+
+func TestGenerateOutputDir(t *testing.T) {
+	actualDir := generatedOutputDir(
+		"/path/to/github.com/hypertrace/agent-config/other/pkg",
+		"github.com/hypertrace/agent-config/some/pkg/v1",
+		"github.com/hypertrace/agent-config/some/pkg",
+	)
+
+	assert.Equal(t, "/path/to/github.com/hypertrace/agent-config/other/pkg/v1", actualDir)
+}
