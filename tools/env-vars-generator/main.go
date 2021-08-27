@@ -194,14 +194,18 @@ func writeRows(
 			documentation := strings.Trim(toFieldDescription(mf.Name, mf.Documentation), ".")
 			if e, ok := enumTypes[mf.Type.Name()]; ok { // isEnum
 				examples := []string{}
-				for _, ev := range e.EnumConstants[0:2] { // limit example to the first two
-					examples = append(examples, ev.Name)
+				for _, ev := range e.EnumConstants[0:2] { // limit example to the first two, excluding unspecified
+					if !strings.Contains(ev.Name, "UNSPECIFIED") {
+						examples = append(examples, ev.Name)
+					}
 				}
 				documentation += fmt.Sprintf(
 					" e.g. `%s=\"%s\"`",
 					prefix+toEnvFormat(mf.Name),
 					strings.Join(examples, ","),
 				)
+			} else if strings.HasPrefix(mf.Type.Name(), "google.protobuf.") {
+				documentation += ". The values should be separated by `,`"
 			}
 
 			_, err := w.WriteString(fmt.Sprintf(

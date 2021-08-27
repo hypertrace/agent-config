@@ -8,7 +8,10 @@ jobs:
       - name: checkout source
         uses: actions/checkout@v1
 
-      - name: run protolint
-        uses: plexsystems/protolint-action@v0.2.0
+      - name: Install buf
+        uses: wizhi/setup-buf@v1
         with:
-          configDirectory: .
+          version: 0.36.0
+
+      - name: Lint proto
+        run: make lint-proto

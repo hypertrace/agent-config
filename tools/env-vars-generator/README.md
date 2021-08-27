@@ -1,6 +1,6 @@
 # Env vars generator
 
-This tool allows us to generate the [list of env vars](../../ENV_VARS.md) from the [config.proto](../../config.proto) file.
+This tool allows us to generate the [list of env vars](../../ENV_VARS.md) from the [config.proto](../../proto/hypertrace/agent/config/v1/config.proto) file.
 
 ## Usage
 
@@ -10,7 +10,7 @@ You can run it using docker (if not familiar with Golang):
 docker build -t hypertrace/agent-config/env-vars-generator .
 docker run \
 -v $(PWD)/../../ENV_VARS.md:/usr/local/ENV_VARS.md \
--v $(PWD)/../../config.proto:/usr/local/config.proto \
+-v $(PWD)/../../proto/hypertrace/agent/config/v1/config.proto:/usr/local/config.proto \
 hypertrace/agent-config/env-vars-generator \
 -o /usr/local/ENV_VARS.md \
 /usr/local/config.proto
@@ -20,5 +20,5 @@ or using golang directly
 
 ```bash
 cd ../.. # back to the main folder
-go run tools/env-vars-generator/main.go config.proto
+go run tools/env-vars-generator/main.go ./proto/hypertrace/agent/config/v1/config.proto
 ```

@@ -1,3 +1,6 @@
 [submodule "tools/env-vars-generator/protobuf"]
 	path = tools/env-vars-generator/protobuf
 	url = https://github.com/protocolbuffers/protobuf.git
+[submodule "tools/go-generator/cmd/generator/_protobuf"]
+	path = tools/go-generator/cmd/generator/_protobuf
+	url = https://github.com/protocolbuffers/protobuf.git

@@ -1,0 +1,16 @@
+version: v1beta1
+build:
+  roots:
+    - .
+lint:
+  use:
+    - DEFAULT
+  ignore_only:
+    ENUM_VALUE_PREFIX:
+      - hypertrace/agent/config/v1/config.proto
+    ENUM_ZERO_VALUE_SUFFIX:
+      - hypertrace/agent/config/v1/config.proto
+breaking:
+  use:
+    - PACKAGE
+    - WIRE_JSON
