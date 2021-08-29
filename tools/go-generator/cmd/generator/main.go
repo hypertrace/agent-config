@@ -49,6 +49,7 @@ func shouldSkipOtherLanguageAgent(typeName string) bool {
 func main() {
 	var outDir = flag.String("out", ".", "Out directory for the generated code.")
 	var optModule = flag.String("opt-module", ".", "Module for the generated code.")
+	var envPrefix = flag.String("env-prefix", "HT_", "Prefix for env var loading")
 	flag.Parse()
 
 	if len(flag.Args()) == 0 {
@@ -76,7 +77,7 @@ Parse PROTO_FILE and generate output value objects`)
 				return nil
 			}
 
-			if err = writeLoadersForProto(cmdDir, fpath, *outDir, *optModule); err != nil {
+			if err = writeLoadersForProto(cmdDir, fpath, *outDir, *optModule, *envPrefix); err != nil {
 				return err
 			}
 
@@ -223,7 +224,7 @@ func generateLoaderForProtoFile(pkgFqpn string, pf pbparser.ProtoFile) ([]byte, 
 }
 
 // writeLoadersForProto generates all the loader config for the proto object
-func writeLoadersForProto(cmdDir, protoFilepath, outDir, optModule string) error {
+func writeLoadersForProto(cmdDir, protoFilepath, outDir, optModule, envPrefix string) error {
 	f, err := os.Open(protoFilepath)
 	if err != nil {
 		return fmt.Errorf("Unable to open the proto file %q: %v", protoFilepath, err)
@@ -248,7 +249,13 @@ func writeLoadersForProto(cmdDir, protoFilepath, outDir, optModule string) error
 		return fmt.Errorf("failed to write loaders file: %v", err)
 	}
 
-	err = copyTemplateFiles(path.Join(cmdDir, "_templates"), genDstDir)
+	templateVars := Loaders{
+		MainType:  "AgentConfig",
+		Header:    generatedHeader,
+		EnvPrefix: envPrefix,
+	}
+
+	err = copyTemplateFiles(path.Join(cmdDir, "_templates"), genDstDir, templateVars)
 	if err != nil {
 		return fmt.Errorf("failed to copy template files: %v", err)
 	}
