@@ -14,21 +14,23 @@ install:
 		google.golang.org/protobuf/cmd/protoc-gen-go \
 		github.com/bufbuild/buf/cmd/buf
 
-lint-proto:
-	$(MAKE) -C ./proto lint
+BREAKING_CHECK_AGAINST := .git\#branch=main
 
-breaking-proto:
-	$(MAKE) -C ./proto breaking
+lint-proto: ## Lints the proto files.
+	buf lint
 
-generate-proto:
+breaking-proto: ## Checks the proto files for breaking changes
+	buf breaking --against $(BREAKING_CHECK_AGAINST)
+
+generate-proto: ## generates code for all languages
 	@# Generates pb struct
-	$(MAKE) -C ./proto generate
+	buf generate
 	
 	@# Generates pb loaders
 	@ROOT=$(PWD)/proto OUT_DIR=$(PWD)/gen/go \
 	$(MAKE) -C ./tools/go-generator
 
-	@echo "Tidy generated modules."
+	@echo "Go Tidy generated modules."
 	@find $(PWD)/gen/go \( -name vendor -o -name '[._].*' -o -name node_modules \) -prune -o -name go.mod -print | sed 's:/go.mod::' | xargs -I {} bash -c 'cd {}; go mod tidy'
 
 generate-env-vars: init-git-submodule ## Generates the ENV_VARS.md with all environment variables.

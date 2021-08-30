@@ -1,7 +1,7 @@
 version: v1beta1
 plugins:
   - name: go
-    out: ../gen/go
+    out: ./gen/go
     opt:
       - paths=import
       - module=github.com/hypertrace/agent-config/gen/go
