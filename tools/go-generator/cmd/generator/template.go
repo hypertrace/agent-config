@@ -10,11 +10,12 @@ import (
 )
 
 type Loaders struct {
-	MainType string
-	Header   string
+	MainType  string
+	Header    string
+	EnvPrefix string
 }
 
-func copyTemplateFiles(srcDir, outDir string) error {
+func copyTemplateFiles(srcDir, outDir string, settings Loaders) error {
 	return filepath.Walk(srcDir, func(fpath string, info os.FileInfo, err error) error {
 		if info.IsDir() {
 			return nil
@@ -44,9 +45,6 @@ func copyTemplateFiles(srcDir, outDir string) error {
 		}
 		defer f.Close()
 
-		return tmpl.Execute(f, Loaders{
-			MainType: "AgentConfig",
-			Header:   generatedHeader,
-		})
+		return tmpl.Execute(f, settings)
 	})
 }

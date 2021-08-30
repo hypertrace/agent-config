@@ -38,6 +38,7 @@ func (pi *protobufImportModuleProvider) Provide(module string) (io.Reader, error
 
 func main() {
 	var outFile = flag.String("o", "./ENV_VARS.md", "OUT_FILE for the generated code.")
+	var prefix = flag.String("p", "HT_", "Prefix for the env vars.")
 	flag.Parse()
 
 	if len(flag.Args()) == 0 {
@@ -100,7 +101,7 @@ Parse PROTO_FILE and generate output document`)
 			fmt.Printf("File to write headers %v \n", err)
 			os.Exit(1)
 		}
-		err = writeRows(w, _type, allTypes, enumTypes, "HT_")
+		err = writeRows(w, _type, allTypes, enumTypes, *prefix)
 		if err != nil {
 			fmt.Printf("File to write rows %v \n", err)
 			os.Exit(1)
@@ -192,29 +193,32 @@ func writeRows(
 	for _, mf := range m.Fields {
 		if mf.Label == "repeated" {
 			documentation := strings.Trim(toFieldDescription(mf.Name, mf.Documentation), ".")
-			if e, ok := enumTypes[mf.Type.Name()]; ok { // isEnum
-				examples := []string{}
-				for _, ev := range e.EnumConstants[0:2] { // limit example to the first two, excluding unspecified
-					if !strings.Contains(ev.Name, "UNSPECIFIED") {
-						examples = append(examples, ev.Name)
-					}
-				}
-				documentation += fmt.Sprintf(
-					" e.g. `%s=\"%s\"`",
-					prefix+toEnvFormat(mf.Name),
-					strings.Join(examples, ","),
-				)
-			} else if strings.HasPrefix(mf.Type.Name(), "google.protobuf.") {
-				documentation += ". The values should be separated by `,`"
-			}
 
-			_, err := w.WriteString(fmt.Sprintf(
-				"| %s | %s. |\n",
-				prefix+toEnvFormat(mf.Name),
-				documentation,
-			))
-			if err != nil {
-				return err
+			if len(documentation) > 0 {
+				if e, ok := enumTypes[mf.Type.Name()]; ok { // isEnum
+					examples := []string{}
+					for _, ev := range e.EnumConstants[0:2] { // limit example to the first two, excluding unspecified
+						if !strings.Contains(ev.Name, "UNSPECIFIED") {
+							examples = append(examples, ev.Name)
+						}
+					}
+					documentation += fmt.Sprintf(
+						" e.g. `%s=\"%s\"`",
+						prefix+toEnvFormat(mf.Name),
+						strings.Join(examples, ","),
+					)
+				} else if strings.HasPrefix(mf.Type.Name(), "google.protobuf.") {
+					documentation += ". The values should be separated by `,`"
+				}
+
+				_, err := w.WriteString(fmt.Sprintf(
+					"| %s | %s. |\n",
+					prefix+toEnvFormat(mf.Name),
+					documentation,
+				))
+				if err != nil {
+					return err
+				}
 			}
 		} else if strings.HasPrefix(mf.Type.Name(), "google.protobuf.") { // i.e. it is scalar
 			_, err := w.WriteString(fmt.Sprintf(
@@ -240,6 +244,10 @@ func toEnvFormat(name string) string {
 }
 
 func toFieldDescription(name, description string) string {
+	if len(description) == 0 {
+		return ""
+	}
+
 	if strings.HasPrefix(description, name) {
 		description = strings.Trim(description[len(name)+1:], " ")
 	}

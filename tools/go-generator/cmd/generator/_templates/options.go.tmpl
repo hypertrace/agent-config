@@ -13,8 +13,8 @@ type opts struct {
 	defaultConfig *{{ .MainType}}
 }
 
-var defaultOptions = opts{
-	prefix:        "HT_",
+var defaultOptions = opts {
+	prefix:        "{{ .EnvPrefix}}",
 	defaultConfig: &{{ .MainType}}{},
 }
 
