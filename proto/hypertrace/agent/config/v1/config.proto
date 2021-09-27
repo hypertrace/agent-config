@@ -72,11 +72,6 @@ message Opa {
 
     // when `true` Open Policy Agent evaluation is enabled to block request
     google.protobuf.BoolValue enabled = 3;
-
-    // Certificate file containing the CA to verify the server's certificate.
-    // This is for private certificates.
-    // If this is set then `endpoint` above should use `https` as the protocol.
-    google.protobuf.StringValue cert_file = 4;
 }
 
 // Message describes what message should be considered for certain DataCapture option
