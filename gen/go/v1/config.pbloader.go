@@ -128,6 +128,16 @@ func (x *Reporting) loadFromEnv(prefix string, defaultValues *Reporting) {
 		x.TraceReporterType = defaultValues.TraceReporterType
 	}
 
+	if val, ok := getStringEnv(prefix + "CERT_FILE"); ok {
+		x.CertFile = &wrappers.StringValue{Value: val}
+	} else if x.CertFile == nil {
+		// when there is no value to set we still prefer to initialize the variable to avoid
+		// `nil` checks in the consumers.
+		x.CertFile = new(wrappers.StringValue)
+		if defaultValues != nil && defaultValues.CertFile != nil {
+			x.CertFile = &wrappers.StringValue{Value: defaultValues.CertFile.Value}
+		}
+	}
 }
 
 // loadFromEnv loads the data from env vars, defaults and makes sure all values are initialized.
@@ -160,6 +170,16 @@ func (x *Opa) loadFromEnv(prefix string, defaultValues *Opa) {
 		x.Enabled = new(wrappers.BoolValue)
 		if defaultValues != nil && defaultValues.Enabled != nil {
 			x.Enabled = &wrappers.BoolValue{Value: defaultValues.Enabled.Value}
+		}
+	}
+	if val, ok := getStringEnv(prefix + "CERT_FILE"); ok {
+		x.CertFile = &wrappers.StringValue{Value: val}
+	} else if x.CertFile == nil {
+		// when there is no value to set we still prefer to initialize the variable to avoid
+		// `nil` checks in the consumers.
+		x.CertFile = new(wrappers.StringValue)
+		if defaultValues != nil && defaultValues.CertFile != nil {
+			x.CertFile = &wrappers.StringValue{Value: defaultValues.CertFile.Value}
 		}
 	}
 }
