@@ -54,6 +54,11 @@ message Reporting {
 
     // reporter type for traces.
     TraceReporterType trace_reporter_type = 5;
+
+    // Certificate file containing the CA to verify the server's certificate.
+    // This is for private certificates.
+    // If this is set then `secure` above should also be set to `true`.
+    google.protobuf.StringValue cert_file = 6;
 }
 
 // Opa covers the options related to the mechanics for getting Open Policy Agent configuration file.

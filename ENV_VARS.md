@@ -14,6 +14,7 @@ Agents can be configured using environment variables:
 | HT_REPORTING_OPA_ENDPOINT | Represents the endpoint for polling OPA config file e.g. http://opa.traceableai:8181/ |
 | HT_REPORTING_OPA_POLL_PERIOD_SECONDS | Poll period in seconds to query OPA service |
 | HT_REPORTING_OPA_ENABLED | When `true` Open Policy Agent evaluation is enabled to block request |
+| HT_REPORTING_CERT_FILE | Certificate file containing the CA to verify the server's certificate. This is for private certificates. If this is set then `secure` above should also be set to `true`. |
 | HT_DATA_CAPTURE_HTTP_HEADERS_REQUEST | When `false` it disables the capture for the request in a client/request operation |
 | HT_DATA_CAPTURE_HTTP_HEADERS_RESPONSE | When `false` it disables the capture for the response in a client/request operation |
 | HT_DATA_CAPTURE_HTTP_BODY_REQUEST | When `false` it disables the capture for the request in a client/request operation |

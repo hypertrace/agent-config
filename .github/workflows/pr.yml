@@ -11,7 +11,7 @@ jobs:
       - name: Install buf
         uses: wizhi/setup-buf@v1
         with:
-          version: 0.36.0
+          version: 1.0.0-rc2
 
       - name: Lint proto
         run: make lint-proto
