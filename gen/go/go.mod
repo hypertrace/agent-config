@@ -1,6 +1,6 @@
 module github.com/hypertrace/agent-config/gen/go
 
-go 1.17
+go 1.15
 
 require (
 	github.com/ghodss/yaml v1.0.0
