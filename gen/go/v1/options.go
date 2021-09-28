@@ -13,7 +13,7 @@ type opts struct {
 	defaultConfig *AgentConfig
 }
 
-var defaultOptions = opts{
+var defaultOptions = opts {
 	prefix:        "HT_",
 	defaultConfig: &AgentConfig{},
 }
