@@ -3,6 +3,7 @@
 package v1
 
 import (
+	"bytes"
 	"fmt"
 	"io/ioutil"
 	"log"
@@ -60,6 +61,7 @@ func getInt32Env(name string) (int32, bool) {
 
 // loadFromFile loads the agent config from a file
 func loadFromFile(c *AgentConfig, filename string) error {
+	unmarshaler := &jsonpb.Unmarshaler{AllowUnknownFields: true}
 	switch ext := filepath.Ext(filename); ext {
 	case ".json":
 		freader, err := os.Open(filename)
@@ -70,7 +72,7 @@ func loadFromFile(c *AgentConfig, filename string) error {
 		// unmarshalers as the wrapped values aren't scalars but of type Message, hence they
 		// have object structure in json e.g. myBoolVal: {Value: true} instead of myBoolVal:true
 		// jsonpb is meant to solve this problem.
-		return jsonpb.Unmarshal(freader, c)
+		return unmarshaler.Unmarshal(freader, c)
 	case ".yaml", ".yml":
 		fcontent, err := ioutil.ReadFile(filename)
 		if err != nil {
@@ -83,7 +85,7 @@ func loadFromFile(c *AgentConfig, filename string) error {
 		if err != nil {
 			return fmt.Errorf("failed to parse file %q: %v", filename, err)
 		}
-		return jsonpb.UnmarshalString(string(fcontentAsJSON), c)
+		return unmarshaler.Unmarshal(bytes.NewReader(fcontentAsJSON), c)
 	default:
 		return fmt.Errorf("unknown extension: %s", ext)
 	}
