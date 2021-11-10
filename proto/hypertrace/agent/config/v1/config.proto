@@ -59,6 +59,13 @@ message Reporting {
     // This is for private certificates.
     // If this is set then `secure` above should also be set to `true`.
     google.protobuf.StringValue cert_file = 6;
+
+    // metric_endpoint represents the endpoint for reporting the metrics.
+    // For OTLP metric reporter type use http://api.traceable.ai:4317
+    google.protobuf.StringValue metric_endpoint = 7;
+
+    // reporter type for metrics.
+    MetricReporterType metric_reporter_type = 8;
 }
 
 // Opa covers the options related to the mechanics for getting Open Policy Agent configuration file.
@@ -128,6 +135,21 @@ enum TraceReporterType {
 
     // Logging reporting format
     LOGGING = 3;
+}
+
+// MetricReporterType represents the reporting format for metric data.
+enum MetricReporterType {
+
+    // Default to none. Agent will use it's default reporting type
+    METRIC_REPORTER_TYPE_UNSPECIFIED = 0;
+
+    // OpenTelemetry protobuf reporting format.
+    // see https://github.com/open-telemetry/opentelemetry-proto
+    METRIC_REPORTER_TYPE_OTLP = 1;
+
+    // Prometheus exposition format.
+    // see https://github.com/prometheus/docs/blob/main/content/docs/instrumenting/exposition_formats.md
+    METRIC_REPORTER_TYPE_PROMETHEUS = 2;
 }
 
 // JavaAgent has the configs specific to javaagent
