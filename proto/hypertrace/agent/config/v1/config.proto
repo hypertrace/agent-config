@@ -49,9 +49,6 @@ message Reporting {
     // user specific token to access Traceable API
     google.protobuf.StringValue token = 3;
 
-    // opa describes the setting related to the Open Policy Agent
-    Opa opa = 4;
-
     // reporter type for traces.
     TraceReporterType trace_reporter_type = 5;
 
@@ -66,19 +63,6 @@ message Reporting {
 
     // reporter type for metrics.
     MetricReporterType metric_reporter_type = 8;
-}
-
-// Opa covers the options related to the mechanics for getting Open Policy Agent configuration file.
-// The client should use secure and token option from reporting settings.
-message Opa {
-    // endpoint represents the endpoint for polling OPA config file e.g. http://opa.traceableai:8181/
-    google.protobuf.StringValue endpoint = 1;
-
-    // poll period in seconds to query OPA service
-    google.protobuf.Int32Value poll_period_seconds  = 2;
-
-    // when `true` Open Policy Agent evaluation is enabled to block request
-    google.protobuf.BoolValue enabled = 3;
 }
 
 // Message describes what message should be considered for certain DataCapture option
