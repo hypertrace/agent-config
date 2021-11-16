@@ -113,15 +113,6 @@ func (x *Reporting) loadFromEnv(prefix string, defaultValues *Reporting) {
 			x.Token = &wrappers.StringValue{Value: defaultValues.Token.Value}
 		}
 	}
-	if x.Opa == nil {
-		x.Opa = new(Opa)
-	}
-	if defaultValues == nil {
-		x.Opa.loadFromEnv(prefix+"OPA_", nil)
-	} else {
-		x.Opa.loadFromEnv(prefix+"OPA_", defaultValues.Opa)
-	}
-
 	if rawVal, ok := getStringEnv(prefix + "TRACE_REPORTER_TYPE"); ok {
 		x.TraceReporterType = TraceReporterType(TraceReporterType_value[rawVal])
 	} else if x.TraceReporterType == TraceReporterType(0) && defaultValues != nil && defaultValues.TraceReporterType != TraceReporterType(0) {
@@ -154,40 +145,6 @@ func (x *Reporting) loadFromEnv(prefix string, defaultValues *Reporting) {
 		x.MetricReporterType = defaultValues.MetricReporterType
 	}
 
-}
-
-// loadFromEnv loads the data from env vars, defaults and makes sure all values are initialized.
-func (x *Opa) loadFromEnv(prefix string, defaultValues *Opa) {
-	if val, ok := getStringEnv(prefix + "ENDPOINT"); ok {
-		x.Endpoint = &wrappers.StringValue{Value: val}
-	} else if x.Endpoint == nil {
-		// when there is no value to set we still prefer to initialize the variable to avoid
-		// `nil` checks in the consumers.
-		x.Endpoint = new(wrappers.StringValue)
-		if defaultValues != nil && defaultValues.Endpoint != nil {
-			x.Endpoint = &wrappers.StringValue{Value: defaultValues.Endpoint.Value}
-		}
-	}
-	if val, ok := getInt32Env(prefix + "POLL_PERIOD_SECONDS"); ok {
-		x.PollPeriodSeconds = &wrappers.Int32Value{Value: val}
-	} else if x.PollPeriodSeconds == nil {
-		// when there is no value to set we still prefer to initialize the variable to avoid
-		// `nil` checks in the consumers.
-		x.PollPeriodSeconds = new(wrappers.Int32Value)
-		if defaultValues != nil && defaultValues.PollPeriodSeconds != nil {
-			x.PollPeriodSeconds = &wrappers.Int32Value{Value: defaultValues.PollPeriodSeconds.Value}
-		}
-	}
-	if val, ok := getBoolEnv(prefix + "ENABLED"); ok {
-		x.Enabled = &wrappers.BoolValue{Value: val}
-	} else if x.Enabled == nil {
-		// when there is no value to set we still prefer to initialize the variable to avoid
-		// `nil` checks in the consumers.
-		x.Enabled = new(wrappers.BoolValue)
-		if defaultValues != nil && defaultValues.Enabled != nil {
-			x.Enabled = &wrappers.BoolValue{Value: defaultValues.Enabled.Value}
-		}
-	}
 }
 
 // loadFromEnv loads the data from env vars, defaults and makes sure all values are initialized.

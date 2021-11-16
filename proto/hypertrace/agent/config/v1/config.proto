@@ -119,6 +119,9 @@ enum TraceReporterType {
 
     // Logging reporting format
     LOGGING = 3;
+
+    // Disable trace reporting
+    NONE = 4;
 }
 
 // MetricReporterType represents the reporting format for metric data.
@@ -134,6 +137,9 @@ enum MetricReporterType {
     // Prometheus exposition format.
     // see https://github.com/prometheus/docs/blob/main/content/docs/instrumenting/exposition_formats.md
     METRIC_REPORTER_TYPE_PROMETHEUS = 2;
+
+    // Disable metric reporting
+    METRIC_REPORTER_TYPE_NONE = 3;
 }
 
 // JavaAgent has the configs specific to javaagent
