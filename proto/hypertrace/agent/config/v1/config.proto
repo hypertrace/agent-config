@@ -138,8 +138,11 @@ enum MetricReporterType {
     // see https://github.com/prometheus/docs/blob/main/content/docs/instrumenting/exposition_formats.md
     METRIC_REPORTER_TYPE_PROMETHEUS = 2;
 
+    // Logging reporting format
+    METRIC_REPORTER_TYPE_LOGGING = 3;
+
     // Disable metric reporting
-    METRIC_REPORTER_TYPE_NONE = 3;
+    METRIC_REPORTER_TYPE_NONE = 4;
 }
 
 // JavaAgent has the configs specific to javaagent
