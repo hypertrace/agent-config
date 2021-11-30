@@ -486,10 +486,16 @@ type DataCapture struct {
 	RpcMetadata *Message `protobuf:"bytes,3,opt,name=rpc_metadata,json=rpcMetadata,proto3" json:"rpc_metadata,omitempty"`
 	// rpc_body enables/disables the capture of the request/response body in RPC
 	RpcBody *Message `protobuf:"bytes,4,opt,name=rpc_body,json=rpcBody,proto3" json:"rpc_body,omitempty"`
-	// maximum size of captured body in bytes. Default should be 131_072 (128 KiB).
+	// body_max_size_bytes is the maximum size of captured body in bytes.
+	// Default should be 131_072 (128 KiB).
 	BodyMaxSizeBytes *wrapperspb.Int32Value `protobuf:"bytes,5,opt,name=body_max_size_bytes,json=bodyMaxSizeBytes,proto3" json:"body_max_size_bytes,omitempty"`
-	// maximum size of body being processed by filters in bytes. Default should
-	// be 1_048_576 (1MB).
+	// body_max_processing_size_bytes is maximum size of body being processed by filters in bytes.
+	// Default should be 1_048_576 (1MB).
+	//
+	// For uncompressed bodies we capture all bytes up to `body_max_processing_size_bytes`
+	// in memory and pass that through the filter.
+	// For compressed and GRPC bodies, if the size of the body is larger than this, we ignore
+	// it entirely, otherwise we decompress/decode the body and then pass it to the filter.
 	BodyMaxProcessingSizeBytes *wrapperspb.Int32Value `protobuf:"bytes,6,opt,name=body_max_processing_size_bytes,json=bodyMaxProcessingSizeBytes,proto3" json:"body_max_processing_size_bytes,omitempty"`
 }
 

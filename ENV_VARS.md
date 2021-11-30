@@ -21,8 +21,8 @@ Agents can be configured using environment variables:
 | HT_DATA_CAPTURE_RPC_METADATA_RESPONSE | When `false` it disables the capture for the response in a client/request operation |
 | HT_DATA_CAPTURE_RPC_BODY_REQUEST | When `false` it disables the capture for the request in a client/request operation |
 | HT_DATA_CAPTURE_RPC_BODY_RESPONSE | When `false` it disables the capture for the response in a client/request operation |
-| HT_DATA_CAPTURE_BODY_MAX_SIZE_BYTES | Maximum size of captured body in bytes. Default should be 131_072 (128 KiB). |
-| HT_DATA_CAPTURE_BODY_MAX_PROCESSING_SIZE_BYTES | Maximum size of body being processed by filters in bytes. Default should be 1_048_576 (1MB). |
+| HT_DATA_CAPTURE_BODY_MAX_SIZE_BYTES | Is the maximum size of captured body in bytes. Default should be 131_072 (128 KiB). |
+| HT_DATA_CAPTURE_BODY_MAX_PROCESSING_SIZE_BYTES | Is maximum size of body being processed by filters in bytes. Default should be 1_048_576 (1MB).  For uncompressed bodies we capture all bytes up to `body_max_processing_size_bytes` in memory and pass that through the filter. For compressed and GRPC bodies, if the size of the body is larger than this, we ignore it entirely, otherwise we decompress/decode the body and then pass it to the filter. |
 | HT_PROPAGATION_FORMATS | List the supported propagation formats e.g. `HT_PROPAGATION_FORMATS="B3,TRACECONTEXT"`. |
 | HT_ENABLED | When `false`, disables the agent |
 | HT_JAVAAGENT_FILTER_JAR_PATHS | Is the list of path to filter jars, separated by `,`. The values should be separated by `,`. |
