@@ -90,6 +90,10 @@ message DataCapture {
 
     // maximum size of captured body in bytes. Default should be 131_072 (128 KiB).
     google.protobuf.Int32Value body_max_size_bytes = 5;
+
+    // maximum size of body being processed by filters in bytes. Default should 
+    // be 1_048_576 (1MB).
+    google.protobuf.Int32Value body_max_processing_size_bytes = 6;
 }
 
 // PropagationFormat represents the propagation formats supported by agents
