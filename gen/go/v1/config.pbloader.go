@@ -219,4 +219,14 @@ func (x *DataCapture) loadFromEnv(prefix string, defaultValues *DataCapture) {
 			x.BodyMaxSizeBytes = &wrappers.Int32Value{Value: defaultValues.BodyMaxSizeBytes.Value}
 		}
 	}
+	if val, ok := getInt32Env(prefix + "BODY_MAX_PROCESSING_SIZE_BYTES"); ok {
+		x.BodyMaxProcessingSizeBytes = &wrappers.Int32Value{Value: val}
+	} else if x.BodyMaxProcessingSizeBytes == nil {
+		// when there is no value to set we still prefer to initialize the variable to avoid
+		// `nil` checks in the consumers.
+		x.BodyMaxProcessingSizeBytes = new(wrappers.Int32Value)
+		if defaultValues != nil && defaultValues.BodyMaxProcessingSizeBytes != nil {
+			x.BodyMaxProcessingSizeBytes = &wrappers.Int32Value{Value: defaultValues.BodyMaxProcessingSizeBytes.Value}
+		}
+	}
 }
