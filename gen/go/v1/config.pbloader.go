@@ -2,7 +2,7 @@
 
 package v1
 
-import wrappers "github.com/golang/protobuf/ptypes/wrappers"
+import wrappers "google.golang.org/protobuf/types/known/wrapperspb"
 
 // loadFromEnv loads the data from env vars, defaults and makes sure all values are initialized.
 func (x *AgentConfig) loadFromEnv(prefix string, defaultValues *AgentConfig) {

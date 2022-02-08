@@ -96,7 +96,7 @@ func generateLoaderForProtoFile(pkgFqpn string, pf pbparser.ProtoFile) ([]byte, 
 	c := fmt.Sprintf("%s\n\n", generatedHeader)
 	c += fmt.Sprintf("package %s\n\n", pkgFqpn[strings.LastIndex(pkgFqpn, "/")+1:])
 	// even if we don't need this import, worth to add it as gofmt is going to remove it.
-	c += "import wrappers \"github.com/golang/protobuf/ptypes/wrappers\"\n\n"
+	c += "import wrappers \"google.golang.org/protobuf/types/known/wrapperspb\"\n\n"
 
 	for _, m := range pf.Messages {
 		if shouldSkipOtherLanguageAgent(m.Name) {

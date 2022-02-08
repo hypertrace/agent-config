@@ -13,7 +13,7 @@ import (
 	"strings"
 
 	"github.com/ghodss/yaml"
-	"github.com/golang/protobuf/jsonpb"
+	"github.com/gogo/protobuf/jsonpb"
 )
 
 // getBoolEnv returns the bool value for an env var and a confirmation
