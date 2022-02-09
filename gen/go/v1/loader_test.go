@@ -62,8 +62,20 @@ func TestGetArrayStringEnv(t *testing.T) {
 	assert.Equal(t, []string{"a", "b"}, vals)
 }
 
-func TestLoadFromFileAcceptsUnknownFields(t *testing.T) {
+func TestLoadFromFile(t *testing.T) {
 	cfg := &AgentConfig{}
 	err := loadFromFile(cfg, "./testdata/config.yaml")
+	assert.NoError(t, err)
+}
+
+func TestLoadFromJsonFile(t *testing.T) {
+	cfg := &AgentConfig{}
+	err := loadFromFile(cfg, "./testdata/config.json")
+	assert.NoError(t, err)
+}
+
+func TestLoadFromFileAcceptsUnknownFields(t *testing.T) {
+	cfg := &AgentConfig{}
+	err := loadFromFile(cfg, "./testdata/config_with_unknowns.yaml")
 	assert.NoError(t, err)
 }
