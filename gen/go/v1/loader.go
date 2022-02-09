@@ -3,7 +3,6 @@
 package v1
 
 import (
-	"bytes"
 	"fmt"
 	"io/ioutil"
 	"log"
@@ -13,7 +12,7 @@ import (
 	"strings"
 
 	"github.com/ghodss/yaml"
-	"github.com/golang/protobuf/jsonpb"
+	"google.golang.org/protobuf/encoding/protojson"
 )
 
 // getBoolEnv returns the bool value for an env var and a confirmation
@@ -61,31 +60,27 @@ func getInt32Env(name string) (int32, bool) {
 
 // loadFromFile loads the agent config from a file
 func loadFromFile(c *AgentConfig, filename string) error {
-	unmarshaler := &jsonpb.Unmarshaler{AllowUnknownFields: true}
+	unmarshaler := protojson.UnmarshalOptions{DiscardUnknown: true}
+	fcontent, err := ioutil.ReadFile(filename)
+	if err != nil {
+		return fmt.Errorf("failed to read file %s: %v", filename, err)
+	}
 	switch ext := filepath.Ext(filename); ext {
 	case ".json":
-		freader, err := os.Open(filename)
-		if err != nil {
-			return fmt.Errorf("failed to open file %q: %v", filename, err)
-		}
 		// The usage of wrappers for scalars in protos make it impossible to use standard
 		// unmarshalers as the wrapped values aren't scalars but of type Message, hence they
 		// have object structure in json e.g. myBoolVal: {Value: true} instead of myBoolVal:true
-		// jsonpb is meant to solve this problem.
-		return unmarshaler.Unmarshal(freader, c)
+		// protojson is meant to solve this problem.
+		return unmarshaler.Unmarshal(fcontent, c)
 	case ".yaml", ".yml":
-		fcontent, err := ioutil.ReadFile(filename)
-		if err != nil {
-			return fmt.Errorf("failed to read file %q: %v", filename, err)
-		}
 		// Because of the reson mentioned above we can't use YAML parsers either and hence
-		// we convert the YAML into JSON in order to parse the JSON value with jsonpb.
+		// we convert the YAML into JSON in order to parse the JSON value with protojson.
 		// The implications of this is that comments and multi-line strings aren't desirable.
 		fcontentAsJSON, err := yaml.YAMLToJSON(fcontent)
 		if err != nil {
-			return fmt.Errorf("failed to parse file %q: %v", filename, err)
+			return fmt.Errorf("failed to parse file %s: %v", filename, err)
 		}
-		return unmarshaler.Unmarshal(bytes.NewReader(fcontentAsJSON), c)
+		return unmarshaler.Unmarshal(fcontentAsJSON, c)
 	default:
 		return fmt.Errorf("unknown extension: %s", ext)
 	}

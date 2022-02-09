@@ -33,7 +33,10 @@ generate-proto: ## generates code for all languages
 	@echo "Go Tidy generated modules."
 	@find $(PWD)/gen/go \( -name vendor -o -name '[._].*' -o -name node_modules \) -prune -o -name go.mod -print | sed 's:/go.mod::' | xargs -I {} bash -c 'cd {}; go mod tidy -go=1.15'
 
-generate-env-vars: init-git-submodule ## Generates the ENV_VARS.md with all environment variables.
+	@# Run gen/go load sanity tests
+	cd $(PWD)/gen/go && go test ./...
+
+generate-env-vars: ## Generates the ENV_VARS.md with all environment variables.
 	docker build -t hypertrace/agent-config/env-vars-generator tools/env-vars-generator
 	touch $(PWD)/ENV_VARS.md # makes sure this is created as a file and not as a directory
 	docker run \

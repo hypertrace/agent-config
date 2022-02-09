@@ -1,0 +1,11 @@
+{
+  "reporting": {
+    "endpoint": "http://myzipkin:9411/api/v2/spans",
+    "foo": "bar"
+  },
+  "dataCapture": {
+    "httpBody": {
+      "response": false
+    }
+  }
+}
