@@ -132,6 +132,9 @@ enum TraceReporterType {
 
     // Disable trace reporting
     NONE = 4;
+
+    // OTLP over http
+    OTLP_HTTP = 5;
 }
 
 // MetricReporterType represents the reporting format for metric data.
