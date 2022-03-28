@@ -18,10 +18,13 @@ In order to make sure compatibility across languages and versions, the following
 
 ## Contributing
 
-Before submitting a PR, make sure you run the linter:
+Before submitting a PR, make sure you run the linter & generate the go modules:
 
 ```bash
 protolint config.proto
+```
+```bash
+make generate-proto
 ```
 
 [ci-img]: https://github.com/hypertrace/agent-config/workflows/lint%20protobuf/badge.svg
