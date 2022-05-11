@@ -23,6 +23,20 @@ func TestGetInt32Env(t *testing.T) {
 	assert.False(t, ok)
 }
 
+func TestGetInt64Env(t *testing.T) {
+	_, ok := getInt64Env("my_int64")
+	assert.False(t, ok)
+
+	os.Setenv("my_int64", "1")
+	intVal, ok := getInt64Env("my_int64")
+	assert.True(t, ok)
+	assert.Equal(t, int64(1), intVal)
+
+	os.Setenv("my_int64", "a")
+	_, ok = getInt64Env("my_int64")
+	assert.False(t, ok)
+}
+
 func TestGetBoolEnv(t *testing.T) {
 	_, ok := getBoolEnv("my_bool")
 	assert.False(t, ok)
