@@ -229,4 +229,14 @@ func (x *DataCapture) loadFromEnv(prefix string, defaultValues *DataCapture) {
 			x.BodyMaxProcessingSizeBytes = &wrappers.Int32Value{Value: defaultValues.BodyMaxProcessingSizeBytes.Value}
 		}
 	}
+	if val, ok := getStringEnv(prefix + "ALLOWED_CONTENT_TYPES"); ok {
+		x.AllowedContentTypes = &wrappers.StringValue{Value: val}
+	} else if x.AllowedContentTypes == nil {
+		// when there is no value to set we still prefer to initialize the variable to avoid
+		// `nil` checks in the consumers.
+		x.AllowedContentTypes = new(wrappers.StringValue)
+		if defaultValues != nil && defaultValues.AllowedContentTypes != nil {
+			x.AllowedContentTypes = &wrappers.StringValue{Value: defaultValues.AllowedContentTypes.Value}
+		}
+	}
 }
