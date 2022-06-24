@@ -1,8 +1,10 @@
 module github.com/hypertrace/agent-config
 
-go 1.16
+go 1.15
 
 require (
-	github.com/bufbuild/buf v0.56.0 // indirect
-	google.golang.org/grpc/cmd/protoc-gen-go-grpc v1.2.0 // indirect
+	github.com/ghodss/yaml v1.0.0
+	github.com/stretchr/testify v1.7.1
+	google.golang.org/protobuf v1.28.0
+	gopkg.in/yaml.v2 v2.4.0 // indirect
 )
