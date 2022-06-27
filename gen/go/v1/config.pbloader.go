@@ -40,7 +40,7 @@ func (x *AgentConfig) loadFromEnv(prefix string, defaultValues *AgentConfig) {
 			vals = append(vals, PropagationFormat(PropagationFormat_value[rawVal]))
 		}
 		x.PropagationFormats = vals
-	} else if len(x.PropagationFormats) == 0 && len(defaultValues.PropagationFormats) > 0 {
+	} else if len(x.PropagationFormats) == 0 && defaultValues.PropagationFormats != nil && len(defaultValues.PropagationFormats) > 0 {
 		x.PropagationFormats = defaultValues.PropagationFormats
 	}
 
@@ -233,7 +233,7 @@ func (x *DataCapture) loadFromEnv(prefix string, defaultValues *DataCapture) {
 		for _, val := range rawVals {
 			x.AllowedContentTypes = append(x.AllowedContentTypes, wrappers.String(val))
 		}
-	} else if len(x.AllowedContentTypes) == 0 && len(defaultValues.AllowedContentTypes) > 0 {
+	} else if len(x.AllowedContentTypes) == 0 && defaultValues.AllowedContentTypes != nil && len(defaultValues.AllowedContentTypes) > 0 {
 		x.AllowedContentTypes = defaultValues.AllowedContentTypes
 	}
 
