@@ -39,7 +39,6 @@ func (x *AgentConfig) loadFromEnv(prefix string, defaultValues *AgentConfig) {
 		for _, rawVal := range rawVals {
 			vals = append(vals, PropagationFormat(PropagationFormat_value[rawVal]))
 		}
-		x.PropagationFormats = vals
 	} else if len(x.PropagationFormats) == 0 && len(defaultValues.PropagationFormats) > 0 {
 		x.PropagationFormats = defaultValues.PropagationFormats
 	}
@@ -229,4 +228,12 @@ func (x *DataCapture) loadFromEnv(prefix string, defaultValues *DataCapture) {
 			x.BodyMaxProcessingSizeBytes = &wrappers.Int32Value{Value: defaultValues.BodyMaxProcessingSizeBytes.Value}
 		}
 	}
+	if rawVals, ok := getArrayStringEnv(prefix + "ALLOWED_CONTENT_TYPES"); ok {
+		for _, val := range rawVals {
+			x.AllowedContentTypes = append(x.AllowedContentTypes, wrappers.String(val))
+		}
+	} else if len(x.AllowedContentTypes) == 0 && len(defaultValues.AllowedContentTypes) > 0 {
+		x.AllowedContentTypes = defaultValues.AllowedContentTypes
+	}
+
 }
