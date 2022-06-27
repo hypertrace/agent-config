@@ -39,6 +39,7 @@ func (x *AgentConfig) loadFromEnv(prefix string, defaultValues *AgentConfig) {
 		for _, rawVal := range rawVals {
 			vals = append(vals, PropagationFormat(PropagationFormat_value[rawVal]))
 		}
+		x.PropagationFormats = vals
 	} else if len(x.PropagationFormats) == 0 && len(defaultValues.PropagationFormats) > 0 {
 		x.PropagationFormats = defaultValues.PropagationFormats
 	}

@@ -138,6 +138,7 @@ func generateLoaderForProtoFile(pkgFqpn string, pf pbparser.ProtoFile) ([]byte, 
 							vals = append(vals, %s(%s_value[rawVal]))
 						}
 					`, namedType.Name(), namedType.Name(), namedType.Name())
+						c += fmt.Sprintf(" x.%s = vals\n", fieldName)
 					} else {
 						// If this errors need to add additional type & target type cast to typeMapForRepeatedFields
 						c += fmt.Sprintf(`for _, val := range rawVals {
