@@ -146,7 +146,7 @@ func generateLoaderForProtoFile(pkgFqpn string, pf pbparser.ProtoFile) ([]byte, 
 						}`, fieldName, fieldName, typeMapForRepeatedFields[namedType.Name()])
 					}
 				}
-				c += fmt.Sprintf("    } else if len(x.%s) == 0 && defaultValues.%s != nil && len(defaultValues.%s) > 0 {\n", fieldName, fieldName, fieldName)
+				c += fmt.Sprintf("    } else if len(x.%s) == 0 && defaultValues != nil && defaultValues.%s != nil && len(defaultValues.%s) > 0 {\n", fieldName, fieldName, fieldName)
 				c += fmt.Sprintf("        x.%s = defaultValues.%s\n", fieldName, fieldName)
 				c += fmt.Sprintf("    }\n\n")
 			} else if strings.HasPrefix(fieldType, "google.protobuf.") {
