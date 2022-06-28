@@ -100,6 +100,11 @@ message DataCapture {
     // For compressed and GRPC bodies, if the size of the body is larger than this, we ignore
     // it entirely, otherwise we decompress/decode the body and then pass it to the filter.
     google.protobuf.Int32Value body_max_processing_size_bytes = 6;
+
+    // Array of allowed content type substrings to record
+    // default should be json, x-www-form-urlencoded
+    // ex: ["json"] will record any request bodies that have a content-type header that includes "json"
+    repeated google.protobuf.StringValue allowed_content_types = 10;
 }
 
 // PropagationFormat represents the propagation formats supported by agents

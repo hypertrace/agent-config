@@ -14,6 +14,10 @@ import (
 	"github.com/tallstoat/pbparser"
 )
 
+var typeMapForRepeatedFields = map[string]string{
+	"google.protobuf.StringValue": "wrappers.String",
+}
+
 func getGoPackageName(pf pbparser.ProtoFile) string {
 	for _, opt := range pf.Options {
 		if opt.Name == "go_package" {
@@ -134,14 +138,15 @@ func generateLoaderForProtoFile(pkgFqpn string, pf pbparser.ProtoFile) ([]byte, 
 							vals = append(vals, %s(%s_value[rawVal]))
 						}
 					`, namedType.Name(), namedType.Name(), namedType.Name())
+						c += fmt.Sprintf(" x.%s = vals\n", fieldName)
 					} else {
-						// unsupported
-						c += "vals = nil"
+						// If this errors need to add additional type & target type cast to typeMapForRepeatedFields
+						c += fmt.Sprintf(`for _, val := range rawVals {
+							x.%s = append(x.%s, %s(val))
+						}`, fieldName, fieldName, typeMapForRepeatedFields[namedType.Name()])
 					}
-
-					c += fmt.Sprintf("        x.%s = vals\n", fieldName)
 				}
-				c += fmt.Sprintf("    } else if len(x.%s) == 0 && len(defaultValues.%s) > 0 {\n", fieldName, fieldName)
+				c += fmt.Sprintf("    } else if len(x.%s) == 0 && defaultValues != nil && len(defaultValues.%s) > 0 {\n", fieldName, fieldName)
 				c += fmt.Sprintf("        x.%s = defaultValues.%s\n", fieldName, fieldName)
 				c += fmt.Sprintf("    }\n\n")
 			} else if strings.HasPrefix(fieldType, "google.protobuf.") {
