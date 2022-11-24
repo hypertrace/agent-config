@@ -63,6 +63,9 @@ message Reporting {
 
     // reporter type for metrics.
     MetricReporterType metric_reporter_type = 8;
+
+    // When `true`, modifies grpc resolver to use dns instead of passthrough and configure round robin client side loadbalancing
+    google.protobuf.BoolValue enable_grpc_loadbalancing = 9;
 }
 
 // Message describes what message should be considered for certain DataCapture option

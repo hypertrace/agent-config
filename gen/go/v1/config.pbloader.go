@@ -145,6 +145,16 @@ func (x *Reporting) loadFromEnv(prefix string, defaultValues *Reporting) {
 		x.MetricReporterType = defaultValues.MetricReporterType
 	}
 
+	if val, ok := getBoolEnv(prefix + "ENABLE_GRPC_LOADBALANCING"); ok {
+		x.EnableGrpcLoadbalancing = &wrappers.BoolValue{Value: val}
+	} else if x.EnableGrpcLoadbalancing == nil {
+		// when there is no value to set we still prefer to initialize the variable to avoid
+		// `nil` checks in the consumers.
+		x.EnableGrpcLoadbalancing = new(wrappers.BoolValue)
+		if defaultValues != nil && defaultValues.EnableGrpcLoadbalancing != nil {
+			x.EnableGrpcLoadbalancing = &wrappers.BoolValue{Value: defaultValues.EnableGrpcLoadbalancing.Value}
+		}
+	}
 }
 
 // loadFromEnv loads the data from env vars, defaults and makes sure all values are initialized.
