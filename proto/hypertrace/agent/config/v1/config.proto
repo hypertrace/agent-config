@@ -33,6 +33,9 @@ message AgentConfig {
 
     // resource_attributes map define the static list of resources which is configured on the tracer
     map<string, string> resource_attributes = 7;
+
+    // telemetry
+    Telemetry telemetry = 8;
 }
 
 // Reporting covers the options related to the mechanics for sending data to the
@@ -170,4 +173,12 @@ enum MetricReporterType {
 message JavaAgent {
     // filter_jar_paths is the list of path to filter jars, separated by `,`
     repeated google.protobuf.StringValue filter_jar_paths = 1;
+}
+
+// Telemetry has config for agent telemetry: traces and metrics on agent's
+// performance and events.
+message Telemetry {
+    // when `true`, an internal span is created and exported when the agent is initialized and started.
+    // It's useful to denote when the application the agent is in started.
+    google.protobuf.BoolValue startup_span_enabled = 1;
 }

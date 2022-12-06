@@ -66,6 +66,15 @@ func (x *AgentConfig) loadFromEnv(prefix string, defaultValues *AgentConfig) {
 		}
 	}
 
+	if x.Telemetry == nil {
+		x.Telemetry = new(Telemetry)
+	}
+	if defaultValues == nil {
+		x.Telemetry.loadFromEnv(prefix+"TELEMETRY_", nil)
+	} else {
+		x.Telemetry.loadFromEnv(prefix+"TELEMETRY_", defaultValues.Telemetry)
+	}
+
 }
 
 // PutResourceAttributes sets values in the ResourceAttributes map.
@@ -247,4 +256,18 @@ func (x *DataCapture) loadFromEnv(prefix string, defaultValues *DataCapture) {
 		x.AllowedContentTypes = defaultValues.AllowedContentTypes
 	}
 
+}
+
+// loadFromEnv loads the data from env vars, defaults and makes sure all values are initialized.
+func (x *Telemetry) loadFromEnv(prefix string, defaultValues *Telemetry) {
+	if val, ok := getBoolEnv(prefix + "STARTUP_SPAN_ENABLED"); ok {
+		x.StartupSpanEnabled = &wrappers.BoolValue{Value: val}
+	} else if x.StartupSpanEnabled == nil {
+		// when there is no value to set we still prefer to initialize the variable to avoid
+		// `nil` checks in the consumers.
+		x.StartupSpanEnabled = new(wrappers.BoolValue)
+		if defaultValues != nil && defaultValues.StartupSpanEnabled != nil {
+			x.StartupSpanEnabled = &wrappers.BoolValue{Value: defaultValues.StartupSpanEnabled.Value}
+		}
+	}
 }
