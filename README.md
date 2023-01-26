@@ -24,7 +24,7 @@ Before submitting a PR, make sure you run the linter & generate the go modules:
 protolint config.proto
 ```
 ```bash
-make generate-proto
+make generate-proto generate-env-vars
 ```
 
 [ci-img]: https://github.com/hypertrace/agent-config/workflows/lint%20protobuf/badge.svg
