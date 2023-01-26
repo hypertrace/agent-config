@@ -270,4 +270,14 @@ func (x *Telemetry) loadFromEnv(prefix string, defaultValues *Telemetry) {
 			x.StartupSpanEnabled = &wrappers.BoolValue{Value: defaultValues.StartupSpanEnabled.Value}
 		}
 	}
+	if val, ok := getBoolEnv(prefix + "METRICS_ENABLED"); ok {
+		x.MetricsEnabled = &wrappers.BoolValue{Value: val}
+	} else if x.MetricsEnabled == nil {
+		// when there is no value to set we still prefer to initialize the variable to avoid
+		// `nil` checks in the consumers.
+		x.MetricsEnabled = new(wrappers.BoolValue)
+		if defaultValues != nil && defaultValues.MetricsEnabled != nil {
+			x.MetricsEnabled = &wrappers.BoolValue{Value: defaultValues.MetricsEnabled.Value}
+		}
+	}
 }

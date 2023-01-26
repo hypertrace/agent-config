@@ -29,3 +29,4 @@ Agents can be configured using environment variables:
 | HT_ENABLED | When `false`, disables the agent |
 | HT_JAVAAGENT_FILTER_JAR_PATHS | Is the list of path to filter jars, separated by `,`. The values should be separated by `,`. |
 | HT_TELEMETRY_STARTUP_SPAN_ENABLED | When `true`, an internal span is created and exported when the agent is initialized and started. It's useful to denote when the application the agent is in started. |
+| HT_TELEMETRY_METRICS_ENABLED | Whether to capture metrics or not. The metrics will be otel go metrics. See https://github.com/open-telemetry/opentelemetry-go/tree/main/metric |

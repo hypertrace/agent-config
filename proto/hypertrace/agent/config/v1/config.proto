@@ -181,4 +181,8 @@ message Telemetry {
     // when `true`, an internal span is created and exported when the agent is initialized and started.
     // It's useful to denote when the application the agent is in started.
     google.protobuf.BoolValue startup_span_enabled = 1;
+
+    // Whether to capture metrics or not. The metrics will be otel go metrics.
+    // See https://github.com/open-telemetry/opentelemetry-go/tree/main/metric
+    google.protobuf.BoolValue metrics_enabled = 2;
 }
