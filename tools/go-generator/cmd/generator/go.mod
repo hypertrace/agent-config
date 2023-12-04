@@ -1,9 +1,15 @@
 module github.com/hypertrace/agent-config/tools/go-generator
 
-go 1.16
+go 1.19
 
 require (
 	github.com/iancoleman/strcase v0.2.0
 	github.com/stretchr/testify v1.7.0
 	github.com/tallstoat/pbparser v0.2.0
+)
+
+require (
+	github.com/davecgh/go-spew v1.1.0 // indirect
+	github.com/pmezard/go-difflib v1.0.0 // indirect
+	gopkg.in/yaml.v3 v3.0.0-20220521103104-8f96da9f5d5e // indirect
 )
