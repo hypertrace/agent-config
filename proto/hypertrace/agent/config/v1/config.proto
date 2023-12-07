@@ -36,6 +36,9 @@ message AgentConfig {
 
     // telemetry
     Telemetry telemetry = 8;
+
+    // blocking config
+    BlockingConfig blocking_config = 9;
 }
 
 // Reporting covers the options related to the mechanics for sending data to the
@@ -185,4 +188,11 @@ message Telemetry {
     // Whether to capture metrics or not. The metrics will be otel go metrics.
     // See https://github.com/open-telemetry/opentelemetry-go/tree/main/metric
     google.protobuf.BoolValue metrics_enabled = 2;
+}
+
+message BlockingConfig {
+    // Allows user to set a custom blocking status code value
+    google.protobuf.Int32Value response_status_code = 1;
+    // Allows user to set a custom blocking message
+    google.protobuf.StringValue response_message = 2;
 }

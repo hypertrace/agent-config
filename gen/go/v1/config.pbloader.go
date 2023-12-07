@@ -75,6 +75,15 @@ func (x *AgentConfig) loadFromEnv(prefix string, defaultValues *AgentConfig) {
 		x.Telemetry.loadFromEnv(prefix+"TELEMETRY_", defaultValues.Telemetry)
 	}
 
+	if x.BlockingConfig == nil {
+		x.BlockingConfig = new(BlockingConfig)
+	}
+	if defaultValues == nil {
+		x.BlockingConfig.loadFromEnv(prefix+"BLOCKING_CONFIG_", nil)
+	} else {
+		x.BlockingConfig.loadFromEnv(prefix+"BLOCKING_CONFIG_", defaultValues.BlockingConfig)
+	}
+
 }
 
 // PutResourceAttributes sets values in the ResourceAttributes map.
@@ -278,6 +287,30 @@ func (x *Telemetry) loadFromEnv(prefix string, defaultValues *Telemetry) {
 		x.MetricsEnabled = new(wrappers.BoolValue)
 		if defaultValues != nil && defaultValues.MetricsEnabled != nil {
 			x.MetricsEnabled = &wrappers.BoolValue{Value: defaultValues.MetricsEnabled.Value}
+		}
+	}
+}
+
+// loadFromEnv loads the data from env vars, defaults and makes sure all values are initialized.
+func (x *BlockingConfig) loadFromEnv(prefix string, defaultValues *BlockingConfig) {
+	if val, ok := getInt32Env(prefix + "RESPONSE_STATUS_CODE"); ok {
+		x.ResponseStatusCode = &wrappers.Int32Value{Value: val}
+	} else if x.ResponseStatusCode == nil {
+		// when there is no value to set we still prefer to initialize the variable to avoid
+		// `nil` checks in the consumers.
+		x.ResponseStatusCode = new(wrappers.Int32Value)
+		if defaultValues != nil && defaultValues.ResponseStatusCode != nil {
+			x.ResponseStatusCode = &wrappers.Int32Value{Value: defaultValues.ResponseStatusCode.Value}
+		}
+	}
+	if val, ok := getStringEnv(prefix + "RESPONSE_MESSAGE"); ok {
+		x.ResponseMessage = &wrappers.StringValue{Value: val}
+	} else if x.ResponseMessage == nil {
+		// when there is no value to set we still prefer to initialize the variable to avoid
+		// `nil` checks in the consumers.
+		x.ResponseMessage = new(wrappers.StringValue)
+		if defaultValues != nil && defaultValues.ResponseMessage != nil {
+			x.ResponseMessage = &wrappers.StringValue{Value: defaultValues.ResponseMessage.Value}
 		}
 	}
 }
