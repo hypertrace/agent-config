@@ -1,6 +1,6 @@
 module github.com/hypertrace/agent-config/tools/go-generator
 
-go 1.19
+go 1.21
 
 require (
 	github.com/iancoleman/strcase v0.2.0
