@@ -1,4 +1,4 @@
-FROM golang:1.15-alpine
+FROM golang:alpine
 
 RUN apk add --update git
 
@@ -10,6 +10,7 @@ WORKDIR $WORKDIR
 
 COPY . $WORKDIR/tools/env-vars-generator
 
-RUN go get ./...
+# Need the go modules in the WORKDIR
+COPY go.* .
 
 ENTRYPOINT ["/usr/local/go/bin/go", "run", "tools/env-vars-generator/main.go"]
