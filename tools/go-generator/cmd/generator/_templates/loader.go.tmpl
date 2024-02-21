@@ -63,7 +63,10 @@ func getInt32Env(name string) (int32, bool) {
 func getInt64Env(name string) (int64, bool) {
 	if val := os.Getenv(name); val != "" {
 		intVal, err := strconv.Atoi(val)
-		return int64(intVal), err == nil
+		if err != nil {
+		    return 0, false
+		}
+		return int64(intVal), true
 	}
 
 	return 0, false
