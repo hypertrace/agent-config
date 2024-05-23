@@ -37,6 +37,9 @@ message AgentConfig {
 
     // telemetry
     Telemetry telemetry = 8;
+
+    // Goagent specific config
+    GoAgent goagent = 9;
 }
 
 // Reporting covers the options related to the mechanics for sending data to the
@@ -174,6 +177,13 @@ enum MetricReporterType {
 message JavaAgent {
     // filter_jar_paths is the list of path to filter jars, separated by `,`
     repeated google.protobuf.StringValue filter_jar_paths = 1;
+}
+
+// GoAgent has the configs specific to goagent
+message GoAgent {
+    // use the custom batch_span_processor adapted from the one in opentelemetry go
+    // and supports some additional metrics
+    google.protobuf.BoolValue use_custom_bsp = 1;
 }
 
 // Telemetry has config for agent telemetry: traces and metrics on agent's

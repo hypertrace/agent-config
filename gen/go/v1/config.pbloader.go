@@ -75,6 +75,15 @@ func (x *AgentConfig) loadFromEnv(prefix string, defaultValues *AgentConfig) {
 		x.Telemetry.loadFromEnv(prefix+"TELEMETRY_", defaultValues.Telemetry)
 	}
 
+	if x.Goagent == nil {
+		x.Goagent = new(GoAgent)
+	}
+	if defaultValues == nil {
+		x.Goagent.loadFromEnv(prefix+"GOAGENT_", nil)
+	} else {
+		x.Goagent.loadFromEnv(prefix+"GOAGENT_", defaultValues.Goagent)
+	}
+
 }
 
 // PutResourceAttributes sets values in the ResourceAttributes map.
@@ -256,6 +265,20 @@ func (x *DataCapture) loadFromEnv(prefix string, defaultValues *DataCapture) {
 		x.AllowedContentTypes = defaultValues.AllowedContentTypes
 	}
 
+}
+
+// loadFromEnv loads the data from env vars, defaults and makes sure all values are initialized.
+func (x *GoAgent) loadFromEnv(prefix string, defaultValues *GoAgent) {
+	if val, ok := getBoolEnv(prefix + "USE_CUSTOM_BSP"); ok {
+		x.UseCustomBsp = &wrappers.BoolValue{Value: val}
+	} else if x.UseCustomBsp == nil {
+		// when there is no value to set we still prefer to initialize the variable to avoid
+		// `nil` checks in the consumers.
+		x.UseCustomBsp = new(wrappers.BoolValue)
+		if defaultValues != nil && defaultValues.UseCustomBsp != nil {
+			x.UseCustomBsp = &wrappers.BoolValue{Value: defaultValues.UseCustomBsp.Value}
+		}
+	}
 }
 
 // loadFromEnv loads the data from env vars, defaults and makes sure all values are initialized.

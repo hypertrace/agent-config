@@ -58,6 +58,20 @@ func getInt32Env(name string) (int32, bool) {
 	return 0, false
 }
 
+// getInt64Env returns the int64 value for an env var and a confirmation
+// if the var exists
+func getInt64Env(name string) (int64, bool) {
+	if val := os.Getenv(name); val != "" {
+		intVal, err := strconv.Atoi(val)
+		if err != nil {
+		    return 0, false
+		}
+		return int64(intVal), true
+	}
+
+	return 0, false
+}
+
 // loadFromFile loads the agent config from a file
 func loadFromFile(c *AgentConfig, filename string) error {
 	unmarshaler := protojson.UnmarshalOptions{DiscardUnknown: true}

@@ -4,8 +4,8 @@ go 1.19
 
 require (
 	github.com/ghodss/yaml v1.0.0
-	github.com/stretchr/testify v1.8.4
-	google.golang.org/protobuf v1.32.0
+	github.com/stretchr/testify v1.9.0
+	google.golang.org/protobuf v1.34.1
 )
 
 require (
