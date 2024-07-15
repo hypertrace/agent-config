@@ -303,14 +303,41 @@ func (x *Telemetry) loadFromEnv(prefix string, defaultValues *Telemetry) {
 			x.MetricsEnabled = &wrappers.BoolValue{Value: defaultValues.MetricsEnabled.Value}
 		}
 	}
-	if val, ok := getBoolEnv(prefix + "SYSTEM_METRICS_ENABLED"); ok {
-		x.SystemMetricsEnabled = &wrappers.BoolValue{Value: val}
-	} else if x.SystemMetricsEnabled == nil {
+}
+
+// loadFromEnv loads the data from env vars, defaults and makes sure all values are initialized.
+func (x *Metrics) loadFromEnv(prefix string, defaultValues *Metrics) {
+	if val, ok := getBoolEnv(prefix + "METRICS_ENABLED"); ok {
+		x.MetricsEnabled = &wrappers.BoolValue{Value: val}
+	} else if x.MetricsEnabled == nil {
 		// when there is no value to set we still prefer to initialize the variable to avoid
 		// `nil` checks in the consumers.
-		x.SystemMetricsEnabled = new(wrappers.BoolValue)
-		if defaultValues != nil && defaultValues.SystemMetricsEnabled != nil {
-			x.SystemMetricsEnabled = &wrappers.BoolValue{Value: defaultValues.SystemMetricsEnabled.Value}
+		x.MetricsEnabled = new(wrappers.BoolValue)
+		if defaultValues != nil && defaultValues.MetricsEnabled != nil {
+			x.MetricsEnabled = &wrappers.BoolValue{Value: defaultValues.MetricsEnabled.Value}
+		}
+	}
+	if x.SystemMetrics == nil {
+		x.SystemMetrics = new(SystemMetrics)
+	}
+	if defaultValues == nil {
+		x.SystemMetrics.loadFromEnv(prefix+"SYSTEM_METRICS_", nil)
+	} else {
+		x.SystemMetrics.loadFromEnv(prefix+"SYSTEM_METRICS_", defaultValues.SystemMetrics)
+	}
+
+}
+
+// loadFromEnv loads the data from env vars, defaults and makes sure all values are initialized.
+func (x *SystemMetrics) loadFromEnv(prefix string, defaultValues *SystemMetrics) {
+	if val, ok := getBoolEnv(prefix + "ENABLED"); ok {
+		x.Enabled = &wrappers.BoolValue{Value: val}
+	} else if x.Enabled == nil {
+		// when there is no value to set we still prefer to initialize the variable to avoid
+		// `nil` checks in the consumers.
+		x.Enabled = new(wrappers.BoolValue)
+		if defaultValues != nil && defaultValues.Enabled != nil {
+			x.Enabled = &wrappers.BoolValue{Value: defaultValues.Enabled.Value}
 		}
 	}
 }

@@ -195,8 +195,21 @@ message Telemetry {
 
     // Whether to capture metrics or not. The metrics will be otel go metrics.
     // See https://github.com/open-telemetry/opentelemetry-go/tree/main/metric
-    google.protobuf.BoolValue metrics_enabled = 2;
+    google.protobuf.BoolValue metrics_enabled = 2 [deprecated = true];
+}
 
+// Metrics has the config to enable OTEl and System metrics
+message Metrics {
+    // Whether to capture metrics or not. The metrics will be otel go metrics.
+    // See https://github.com/open-telemetry/opentelemetry-go/tree/main/metric
+    google.protobuf.BoolValue metrics_enabled = 1;
+
+    // System metrics configuration.
+    SystemMetrics system_metrics = 2;
+}
+
+// SystemMetrics has the config for capturing system metrics.
+message SystemMetrics {
     // Whether to capture system metrics or not. The system metrics is setup in goagent.
-    google.protobuf.BoolValue system_metrics_enabled = 3;
+    google.protobuf.BoolValue enabled = 1;
 }
