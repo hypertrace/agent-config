@@ -4,6 +4,7 @@ import (
 	"flag"
 	"fmt"
 	"go/format"
+	"io"
 	"log"
 	"os"
 	"path"
@@ -275,6 +276,11 @@ func writeLoadersForProto(cmdDir, protoFilepath, outDir, optModule, envPrefix st
 		return fmt.Errorf("failed to write loaders file: %v", err)
 	}
 
+	err = copyProtoFile(f, genDstDir)
+	if err != nil {
+		return fmt.Errorf("failed to write proto file: %v", err)
+	}
+
 	return nil
 }
 
@@ -330,5 +336,27 @@ func writeToFile(filename string, content []byte) error {
 		return fmt.Errorf("failed to write into file %q: %v", filename, err)
 	}
 
+	return nil
+}
+
+func copyProtoFile(file *os.File, genDstDir string) error {
+	_, err := file.Seek(0, io.SeekStart)
+	if err != nil {
+		return err
+	}
+
+	protoContent, err := io.ReadAll(file)
+	if err != nil {
+		return err
+	}
+
+	err = os.MkdirAll(path.Join(path.Dir(genDstDir), "proto", "v1"), os.ModePerm)
+	if err != nil {
+		return err
+	}
+	err = writeToFile(path.Join(path.Dir(genDstDir), "proto", "v1", "config.proto"), protoContent)
+	if err != nil {
+		return err
+	}
 	return nil
 }
