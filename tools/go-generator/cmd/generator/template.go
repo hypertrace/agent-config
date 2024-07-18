@@ -2,7 +2,6 @@ package main
 
 import (
 	"html/template"
-	"io/ioutil"
 	"os"
 	"path"
 	"path/filepath"
@@ -21,7 +20,7 @@ func copyTemplateFiles(srcDir, outDir string, settings Loaders) error {
 			return nil
 		}
 
-		content, err := ioutil.ReadFile(fpath)
+		content, err := os.ReadFile(fpath)
 		if err != nil {
 			return err
 		}
