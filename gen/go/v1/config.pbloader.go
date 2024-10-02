@@ -173,6 +173,12 @@ func (x *Reporting) loadFromEnv(prefix string, defaultValues *Reporting) {
 			x.EnableGrpcLoadbalancing = &wrappers.BoolValue{Value: defaultValues.EnableGrpcLoadbalancing.Value}
 		}
 	}
+	if rawVal, ok := getStringEnv(prefix + "SPAN_PROCESSOR_TYPE"); ok {
+		x.SpanProcessorType = SpanProcessorType(SpanProcessorType_value[rawVal])
+	} else if x.SpanProcessorType == SpanProcessorType(0) && defaultValues != nil && defaultValues.SpanProcessorType != SpanProcessorType(0) {
+		x.SpanProcessorType = defaultValues.SpanProcessorType
+	}
+
 }
 
 // loadFromEnv loads the data from env vars, defaults and makes sure all values are initialized.

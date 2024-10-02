@@ -73,6 +73,9 @@ message Reporting {
 
     // When `true`, modifies grpc resolver to use dns instead of passthrough and configure round robin client side loadbalancing
     google.protobuf.BoolValue enable_grpc_loadbalancing = 9;
+
+    // Configure the span processor type to be used for exporting
+    SpanProcessorType span_processor_type = 10;
 }
 
 // Message describes what message should be considered for certain DataCapture option
@@ -171,6 +174,18 @@ enum MetricReporterType {
 
     // Disable metric reporting
     METRIC_REPORTER_TYPE_NONE = 4;
+}
+
+enum SpanProcessorType {
+
+    // Default to none. Agent will use it's default reporting type
+    SPAN_PROCESSOR_TYPE_UNSPECIFIED = 0;
+
+    // Simple Span Processor
+    SPAN_PROCESSOR_TYPE_SIMPLE = 1;
+
+    // Batch Span Processor
+    SPAN_PROCESSOR_TYPE_BATCH = 2;
 }
 
 // JavaAgent has the configs specific to javaagent
