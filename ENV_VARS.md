@@ -7,12 +7,6 @@ Agents can be configured using environment variables:
 
 | Name | Description |
 |------|-------------|
-| HT_ENABLED | When `true` the thread pool will be activated |
-| HT_NUM_WORKERS | Number of workers in the pool |
-| HT_BUFFER_SIZE | Buffer size for handling spikes |
-
-| Name | Description |
-|------|-------------|
 | HT_SERVICE_NAME | Identifies the service/process running e.g. "my service" |
 | HT_REPORTING_ENDPOINT | Represents the endpoint for reporting the traces For ZIPKIN reporter type use http://api.traceable.ai:9411/api/v2/spans For OTLP reporter type use http://api.traceable.ai:4317 |
 | HT_REPORTING_SECURE | When `true`, connects to endpoints over TLS. |

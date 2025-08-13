@@ -822,70 +822,6 @@ func (x *Telemetry) GetLogs() *LogsExport {
 	return nil
 }
 
-// Generic thread pool config for different models
-type ThreadPool struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// when `true` the thread pool will be activated
-	Enabled *wrapperspb.BoolValue `protobuf:"bytes,1,opt,name=enabled,proto3" json:"enabled,omitempty"`
-	// number of workers in the pool
-	NumWorkers *wrapperspb.Int32Value `protobuf:"bytes,2,opt,name=num_workers,json=numWorkers,proto3" json:"num_workers,omitempty"`
-	// buffer size for handling spikes
-	BufferSize    *wrapperspb.Int32Value `protobuf:"bytes,3,opt,name=buffer_size,json=bufferSize,proto3" json:"buffer_size,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *ThreadPool) Reset() {
-	*x = ThreadPool{}
-	mi := &file_hypertrace_agent_config_v1_config_proto_msgTypes[7]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *ThreadPool) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*ThreadPool) ProtoMessage() {}
-
-func (x *ThreadPool) ProtoReflect() protoreflect.Message {
-	mi := &file_hypertrace_agent_config_v1_config_proto_msgTypes[7]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use ThreadPool.ProtoReflect.Descriptor instead.
-func (*ThreadPool) Descriptor() ([]byte, []int) {
-	return file_hypertrace_agent_config_v1_config_proto_rawDescGZIP(), []int{7}
-}
-
-func (x *ThreadPool) GetEnabled() *wrapperspb.BoolValue {
-	if x != nil {
-		return x.Enabled
-	}
-	return nil
-}
-
-func (x *ThreadPool) GetNumWorkers() *wrapperspb.Int32Value {
-	if x != nil {
-		return x.NumWorkers
-	}
-	return nil
-}
-
-func (x *ThreadPool) GetBufferSize() *wrapperspb.Int32Value {
-	if x != nil {
-		return x.BufferSize
-	}
-	return nil
-}
-
 type LogsExport struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// when true, logs from the agent will be exported to Traceable Platform Agent
@@ -898,7 +834,7 @@ type LogsExport struct {
 
 func (x *LogsExport) Reset() {
 	*x = LogsExport{}
-	mi := &file_hypertrace_agent_config_v1_config_proto_msgTypes[8]
+	mi := &file_hypertrace_agent_config_v1_config_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -910,7 +846,7 @@ func (x *LogsExport) String() string {
 func (*LogsExport) ProtoMessage() {}
 
 func (x *LogsExport) ProtoReflect() protoreflect.Message {
-	mi := &file_hypertrace_agent_config_v1_config_proto_msgTypes[8]
+	mi := &file_hypertrace_agent_config_v1_config_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -923,7 +859,7 @@ func (x *LogsExport) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use LogsExport.ProtoReflect.Descriptor instead.
 func (*LogsExport) Descriptor() ([]byte, []int) {
-	return file_hypertrace_agent_config_v1_config_proto_rawDescGZIP(), []int{8}
+	return file_hypertrace_agent_config_v1_config_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *LogsExport) GetEnabled() *wrapperspb.BoolValue {
@@ -986,14 +922,7 @@ const file_hypertrace_agent_config_v1_config_proto_rawDesc = "" +
 	"\tTelemetry\x12L\n" +
 	"\x14startup_span_enabled\x18\x01 \x01(\v2\x1a.google.protobuf.BoolValueR\x12startupSpanEnabled\x12C\n" +
 	"\x0fmetrics_enabled\x18\x02 \x01(\v2\x1a.google.protobuf.BoolValueR\x0emetricsEnabled\x12:\n" +
-	"\x04logs\x18\x03 \x01(\v2&.hypertrace.agent.config.v1.LogsExportR\x04logs\"\xbe\x01\n" +
-	"\n" +
-	"ThreadPool\x124\n" +
-	"\aenabled\x18\x01 \x01(\v2\x1a.google.protobuf.BoolValueR\aenabled\x12<\n" +
-	"\vnum_workers\x18\x02 \x01(\v2\x1b.google.protobuf.Int32ValueR\n" +
-	"numWorkers\x12<\n" +
-	"\vbuffer_size\x18\x03 \x01(\v2\x1b.google.protobuf.Int32ValueR\n" +
-	"bufferSize\"~\n" +
+	"\x04logs\x18\x03 \x01(\v2&.hypertrace.agent.config.v1.LogsExportR\x04logs\"~\n" +
 	"\n" +
 	"LogsExport\x124\n" +
 	"\aenabled\x18\x01 \x01(\v2\x1a.google.protobuf.BoolValueR\aenabled\x12:\n" +
@@ -1037,7 +966,7 @@ func file_hypertrace_agent_config_v1_config_proto_rawDescGZIP() []byte {
 }
 
 var file_hypertrace_agent_config_v1_config_proto_enumTypes = make([]protoimpl.EnumInfo, 4)
-var file_hypertrace_agent_config_v1_config_proto_msgTypes = make([]protoimpl.MessageInfo, 10)
+var file_hypertrace_agent_config_v1_config_proto_msgTypes = make([]protoimpl.MessageInfo, 9)
 var file_hypertrace_agent_config_v1_config_proto_goTypes = []any{
 	(PropagationFormat)(0),         // 0: hypertrace.agent.config.v1.PropagationFormat
 	(TraceReporterType)(0),         // 1: hypertrace.agent.config.v1.TraceReporterType
@@ -1050,55 +979,51 @@ var file_hypertrace_agent_config_v1_config_proto_goTypes = []any{
 	(*JavaAgent)(nil),              // 8: hypertrace.agent.config.v1.JavaAgent
 	(*GoAgent)(nil),                // 9: hypertrace.agent.config.v1.GoAgent
 	(*Telemetry)(nil),              // 10: hypertrace.agent.config.v1.Telemetry
-	(*ThreadPool)(nil),             // 11: hypertrace.agent.config.v1.ThreadPool
-	(*LogsExport)(nil),             // 12: hypertrace.agent.config.v1.LogsExport
-	nil,                            // 13: hypertrace.agent.config.v1.AgentConfig.ResourceAttributesEntry
-	(*wrapperspb.StringValue)(nil), // 14: google.protobuf.StringValue
-	(*wrapperspb.BoolValue)(nil),   // 15: google.protobuf.BoolValue
-	(*wrapperspb.Int32Value)(nil),  // 16: google.protobuf.Int32Value
+	(*LogsExport)(nil),             // 11: hypertrace.agent.config.v1.LogsExport
+	nil,                            // 12: hypertrace.agent.config.v1.AgentConfig.ResourceAttributesEntry
+	(*wrapperspb.StringValue)(nil), // 13: google.protobuf.StringValue
+	(*wrapperspb.BoolValue)(nil),   // 14: google.protobuf.BoolValue
+	(*wrapperspb.Int32Value)(nil),  // 15: google.protobuf.Int32Value
 }
 var file_hypertrace_agent_config_v1_config_proto_depIdxs = []int32{
-	14, // 0: hypertrace.agent.config.v1.AgentConfig.service_name:type_name -> google.protobuf.StringValue
+	13, // 0: hypertrace.agent.config.v1.AgentConfig.service_name:type_name -> google.protobuf.StringValue
 	5,  // 1: hypertrace.agent.config.v1.AgentConfig.reporting:type_name -> hypertrace.agent.config.v1.Reporting
 	7,  // 2: hypertrace.agent.config.v1.AgentConfig.data_capture:type_name -> hypertrace.agent.config.v1.DataCapture
 	0,  // 3: hypertrace.agent.config.v1.AgentConfig.propagation_formats:type_name -> hypertrace.agent.config.v1.PropagationFormat
-	15, // 4: hypertrace.agent.config.v1.AgentConfig.enabled:type_name -> google.protobuf.BoolValue
+	14, // 4: hypertrace.agent.config.v1.AgentConfig.enabled:type_name -> google.protobuf.BoolValue
 	8,  // 5: hypertrace.agent.config.v1.AgentConfig.javaagent:type_name -> hypertrace.agent.config.v1.JavaAgent
-	13, // 6: hypertrace.agent.config.v1.AgentConfig.resource_attributes:type_name -> hypertrace.agent.config.v1.AgentConfig.ResourceAttributesEntry
+	12, // 6: hypertrace.agent.config.v1.AgentConfig.resource_attributes:type_name -> hypertrace.agent.config.v1.AgentConfig.ResourceAttributesEntry
 	10, // 7: hypertrace.agent.config.v1.AgentConfig.telemetry:type_name -> hypertrace.agent.config.v1.Telemetry
 	9,  // 8: hypertrace.agent.config.v1.AgentConfig.goagent:type_name -> hypertrace.agent.config.v1.GoAgent
-	14, // 9: hypertrace.agent.config.v1.Reporting.endpoint:type_name -> google.protobuf.StringValue
-	15, // 10: hypertrace.agent.config.v1.Reporting.secure:type_name -> google.protobuf.BoolValue
-	14, // 11: hypertrace.agent.config.v1.Reporting.token:type_name -> google.protobuf.StringValue
+	13, // 9: hypertrace.agent.config.v1.Reporting.endpoint:type_name -> google.protobuf.StringValue
+	14, // 10: hypertrace.agent.config.v1.Reporting.secure:type_name -> google.protobuf.BoolValue
+	13, // 11: hypertrace.agent.config.v1.Reporting.token:type_name -> google.protobuf.StringValue
 	1,  // 12: hypertrace.agent.config.v1.Reporting.trace_reporter_type:type_name -> hypertrace.agent.config.v1.TraceReporterType
-	14, // 13: hypertrace.agent.config.v1.Reporting.cert_file:type_name -> google.protobuf.StringValue
-	14, // 14: hypertrace.agent.config.v1.Reporting.metric_endpoint:type_name -> google.protobuf.StringValue
+	13, // 13: hypertrace.agent.config.v1.Reporting.cert_file:type_name -> google.protobuf.StringValue
+	13, // 14: hypertrace.agent.config.v1.Reporting.metric_endpoint:type_name -> google.protobuf.StringValue
 	2,  // 15: hypertrace.agent.config.v1.Reporting.metric_reporter_type:type_name -> hypertrace.agent.config.v1.MetricReporterType
-	15, // 16: hypertrace.agent.config.v1.Reporting.enable_grpc_loadbalancing:type_name -> google.protobuf.BoolValue
-	15, // 17: hypertrace.agent.config.v1.Message.request:type_name -> google.protobuf.BoolValue
-	15, // 18: hypertrace.agent.config.v1.Message.response:type_name -> google.protobuf.BoolValue
+	14, // 16: hypertrace.agent.config.v1.Reporting.enable_grpc_loadbalancing:type_name -> google.protobuf.BoolValue
+	14, // 17: hypertrace.agent.config.v1.Message.request:type_name -> google.protobuf.BoolValue
+	14, // 18: hypertrace.agent.config.v1.Message.response:type_name -> google.protobuf.BoolValue
 	6,  // 19: hypertrace.agent.config.v1.DataCapture.http_headers:type_name -> hypertrace.agent.config.v1.Message
 	6,  // 20: hypertrace.agent.config.v1.DataCapture.http_body:type_name -> hypertrace.agent.config.v1.Message
 	6,  // 21: hypertrace.agent.config.v1.DataCapture.rpc_metadata:type_name -> hypertrace.agent.config.v1.Message
 	6,  // 22: hypertrace.agent.config.v1.DataCapture.rpc_body:type_name -> hypertrace.agent.config.v1.Message
-	16, // 23: hypertrace.agent.config.v1.DataCapture.body_max_size_bytes:type_name -> google.protobuf.Int32Value
-	16, // 24: hypertrace.agent.config.v1.DataCapture.body_max_processing_size_bytes:type_name -> google.protobuf.Int32Value
-	14, // 25: hypertrace.agent.config.v1.DataCapture.allowed_content_types:type_name -> google.protobuf.StringValue
-	14, // 26: hypertrace.agent.config.v1.JavaAgent.filter_jar_paths:type_name -> google.protobuf.StringValue
-	15, // 27: hypertrace.agent.config.v1.GoAgent.use_custom_bsp:type_name -> google.protobuf.BoolValue
-	15, // 28: hypertrace.agent.config.v1.Telemetry.startup_span_enabled:type_name -> google.protobuf.BoolValue
-	15, // 29: hypertrace.agent.config.v1.Telemetry.metrics_enabled:type_name -> google.protobuf.BoolValue
-	12, // 30: hypertrace.agent.config.v1.Telemetry.logs:type_name -> hypertrace.agent.config.v1.LogsExport
-	15, // 31: hypertrace.agent.config.v1.ThreadPool.enabled:type_name -> google.protobuf.BoolValue
-	16, // 32: hypertrace.agent.config.v1.ThreadPool.num_workers:type_name -> google.protobuf.Int32Value
-	16, // 33: hypertrace.agent.config.v1.ThreadPool.buffer_size:type_name -> google.protobuf.Int32Value
-	15, // 34: hypertrace.agent.config.v1.LogsExport.enabled:type_name -> google.protobuf.BoolValue
-	3,  // 35: hypertrace.agent.config.v1.LogsExport.level:type_name -> hypertrace.agent.config.v1.LogLevel
-	36, // [36:36] is the sub-list for method output_type
-	36, // [36:36] is the sub-list for method input_type
-	36, // [36:36] is the sub-list for extension type_name
-	36, // [36:36] is the sub-list for extension extendee
-	0,  // [0:36] is the sub-list for field type_name
+	15, // 23: hypertrace.agent.config.v1.DataCapture.body_max_size_bytes:type_name -> google.protobuf.Int32Value
+	15, // 24: hypertrace.agent.config.v1.DataCapture.body_max_processing_size_bytes:type_name -> google.protobuf.Int32Value
+	13, // 25: hypertrace.agent.config.v1.DataCapture.allowed_content_types:type_name -> google.protobuf.StringValue
+	13, // 26: hypertrace.agent.config.v1.JavaAgent.filter_jar_paths:type_name -> google.protobuf.StringValue
+	14, // 27: hypertrace.agent.config.v1.GoAgent.use_custom_bsp:type_name -> google.protobuf.BoolValue
+	14, // 28: hypertrace.agent.config.v1.Telemetry.startup_span_enabled:type_name -> google.protobuf.BoolValue
+	14, // 29: hypertrace.agent.config.v1.Telemetry.metrics_enabled:type_name -> google.protobuf.BoolValue
+	11, // 30: hypertrace.agent.config.v1.Telemetry.logs:type_name -> hypertrace.agent.config.v1.LogsExport
+	14, // 31: hypertrace.agent.config.v1.LogsExport.enabled:type_name -> google.protobuf.BoolValue
+	3,  // 32: hypertrace.agent.config.v1.LogsExport.level:type_name -> hypertrace.agent.config.v1.LogLevel
+	33, // [33:33] is the sub-list for method output_type
+	33, // [33:33] is the sub-list for method input_type
+	33, // [33:33] is the sub-list for extension type_name
+	33, // [33:33] is the sub-list for extension extendee
+	0,  // [0:33] is the sub-list for field type_name
 }
 
 func init() { file_hypertrace_agent_config_v1_config_proto_init() }
@@ -1112,7 +1037,7 @@ func file_hypertrace_agent_config_v1_config_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_hypertrace_agent_config_v1_config_proto_rawDesc), len(file_hypertrace_agent_config_v1_config_proto_rawDesc)),
 			NumEnums:      4,
-			NumMessages:   10,
+			NumMessages:   9,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

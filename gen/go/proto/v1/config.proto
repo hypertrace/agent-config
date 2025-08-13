@@ -201,17 +201,6 @@ message Telemetry {
     LogsExport logs = 3;
 }
 
-// Generic thread pool config for different models
-message ThreadPool {
-  // when `true` the thread pool will be activated
-  google.protobuf.BoolValue enabled = 1;
-    // number of workers in the pool
-  google.protobuf.Int32Value num_workers = 2;
-    // buffer size for handling spikes
-  google.protobuf.Int32Value buffer_size = 3;
-}
-
-
 enum LogLevel {
   LOG_LEVEL_UNSPECIFIED = 0;
   LOG_LEVEL_TRACE = 1;
