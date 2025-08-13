@@ -196,4 +196,27 @@ message Telemetry {
     // Whether to capture metrics or not. The metrics will be otel go metrics.
     // See https://github.com/open-telemetry/opentelemetry-go/tree/main/metric
     google.protobuf.BoolValue metrics_enabled = 2;
+
+    // Configure logs export.
+    LogsExport logs = 3;
+}
+
+enum LogLevel {
+  LOG_LEVEL_UNSPECIFIED = 0;
+  LOG_LEVEL_TRACE = 1;
+  LOG_LEVEL_DEBUG = 2;
+  LOG_LEVEL_INFO = 3;
+  LOG_LEVEL_WARN = 4;
+  LOG_LEVEL_ERROR = 5;
+}
+
+message LogsExport {
+  // when true, logs from the agent will be exported to Traceable Platform Agent
+  // via Opentelemetry Logs pipeline. Reporting config is shared with the Traces pipeline.
+  google.protobuf.BoolValue enabled = 1;
+
+  // the level of logs to export, anything below that level will not be exported, 
+  // it'll only be available in the local log file.
+
+  LogLevel level = 2;
 }

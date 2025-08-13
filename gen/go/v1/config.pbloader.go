@@ -303,4 +303,33 @@ func (x *Telemetry) loadFromEnv(prefix string, defaultValues *Telemetry) {
 			x.MetricsEnabled = &wrappers.BoolValue{Value: defaultValues.MetricsEnabled.Value}
 		}
 	}
+	if x.Logs == nil {
+		x.Logs = new(LogsExport)
+	}
+	if defaultValues == nil {
+		x.Logs.loadFromEnv(prefix+"LOGS_", nil)
+	} else {
+		x.Logs.loadFromEnv(prefix+"LOGS_", defaultValues.Logs)
+	}
+
+}
+
+// loadFromEnv loads the data from env vars, defaults and makes sure all values are initialized.
+func (x *LogsExport) loadFromEnv(prefix string, defaultValues *LogsExport) {
+	if val, ok := getBoolEnv(prefix + "ENABLED"); ok {
+		x.Enabled = &wrappers.BoolValue{Value: val}
+	} else if x.Enabled == nil {
+		// when there is no value to set we still prefer to initialize the variable to avoid
+		// `nil` checks in the consumers.
+		x.Enabled = new(wrappers.BoolValue)
+		if defaultValues != nil && defaultValues.Enabled != nil {
+			x.Enabled = &wrappers.BoolValue{Value: defaultValues.Enabled.Value}
+		}
+	}
+	if rawVal, ok := getStringEnv(prefix + "LEVEL"); ok {
+		x.Level = LogLevel(LogLevel_value[rawVal])
+	} else if x.Level == LogLevel(0) && defaultValues != nil && defaultValues.Level != LogLevel(0) {
+		x.Level = defaultValues.Level
+	}
+
 }

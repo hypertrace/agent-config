@@ -30,4 +30,5 @@ Agents can be configured using environment variables:
 | HT_JAVAAGENT_FILTER_JAR_PATHS | Is the list of path to filter jars, separated by `,`. The values should be separated by `,`. |
 | HT_TELEMETRY_STARTUP_SPAN_ENABLED | When `true`, an internal span is created and exported when the agent is initialized and started. It's useful to denote when the application the agent is in started. |
 | HT_TELEMETRY_METRICS_ENABLED | Whether to capture metrics or not. The metrics will be otel go metrics. See https://github.com/open-telemetry/opentelemetry-go/tree/main/metric |
+| HT_TELEMETRY_LOGS_ENABLED | When true, logs from the agent will be exported to Traceable Platform Agent via Opentelemetry Logs pipeline. Reporting config is shared with the Traces pipeline. |
 | HT_GOAGENT_USE_CUSTOM_BSP | Use the custom batch_span_processor adapted from the one in opentelemetry go and supports some additional metrics |

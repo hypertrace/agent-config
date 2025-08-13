@@ -173,7 +173,7 @@ func generateLoaderForProtoFile(pkgFqpn string, pf pbparser.ProtoFile) ([]byte, 
 						envPrefix,
 					)
 					c += fmt.Sprintf("        x.%s = %s(%s_value[rawVal])\n", fieldName, namedType.Name(), namedType.Name())
-					c += fmt.Sprintf("    } else if x.%s == %s(0) && defaultValues != nil && defaultValues.%s != %s(0) {\n", fieldName, fieldName, fieldName, fieldName)
+					c += fmt.Sprintf("    } else if x.%s == %s(0) && defaultValues != nil && defaultValues.%s != %s(0) {\n", fieldName, namedType.Name(), fieldName, namedType.Name())
 					c += fmt.Sprintf("        x.%s = defaultValues.%s\n", fieldName, fieldName)
 					c += fmt.Sprintf("    }\n\n")
 				} else {
