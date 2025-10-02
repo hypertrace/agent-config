@@ -14,6 +14,7 @@ Agents can be configured using environment variables:
 | HT_REPORTING_CERT_FILE | Certificate file containing the CA to verify the server's certificate. This is for private certificates. If this is set then `secure` above should also be set to `true`. |
 | HT_REPORTING_METRIC_ENDPOINT | Represents the endpoint for reporting the metrics. For OTLP metric reporter type use http://api.traceable.ai:4317 |
 | HT_REPORTING_ENABLE_GRPC_LOADBALANCING | When `true`, modifies grpc resolver to use dns instead of passthrough and configure round robin client side loadbalancing |
+| HT_REPORTING_COMPRESSION_ENABLED | Enable compression |
 | HT_DATA_CAPTURE_HTTP_HEADERS_REQUEST | When `false` it disables the capture for the request in a client/request operation |
 | HT_DATA_CAPTURE_HTTP_HEADERS_RESPONSE | When `false` it disables the capture for the response in a client/request operation |
 | HT_DATA_CAPTURE_HTTP_BODY_REQUEST | When `false` it disables the capture for the request in a client/request operation |

@@ -73,6 +73,9 @@ message Reporting {
 
     // When `true`, modifies grpc resolver to use dns instead of passthrough and configure round robin client side loadbalancing
     google.protobuf.BoolValue enable_grpc_loadbalancing = 9;
+
+    // Enable compression
+    google.protobuf.BoolValue compression_enabled = 10;
 }
 
 // Message describes what message should be considered for certain DataCapture option
