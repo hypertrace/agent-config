@@ -173,16 +173,12 @@ func (x *Reporting) loadFromEnv(prefix string, defaultValues *Reporting) {
 			x.EnableGrpcLoadbalancing = &wrappers.BoolValue{Value: defaultValues.EnableGrpcLoadbalancing.Value}
 		}
 	}
-	if val, ok := getBoolEnv(prefix + "COMPRESSION_ENABLED"); ok {
-		x.CompressionEnabled = &wrappers.BoolValue{Value: val}
-	} else if x.CompressionEnabled == nil {
-		// when there is no value to set we still prefer to initialize the variable to avoid
-		// `nil` checks in the consumers.
-		x.CompressionEnabled = new(wrappers.BoolValue)
-		if defaultValues != nil && defaultValues.CompressionEnabled != nil {
-			x.CompressionEnabled = &wrappers.BoolValue{Value: defaultValues.CompressionEnabled.Value}
-		}
+	if rawVal, ok := getStringEnv(prefix + "COMPRESSION_TYPE"); ok {
+		x.CompressionType = CompressionType(CompressionType_value[rawVal])
+	} else if x.CompressionType == CompressionType(0) && defaultValues != nil && defaultValues.CompressionType != CompressionType(0) {
+		x.CompressionType = defaultValues.CompressionType
 	}
+
 }
 
 // loadFromEnv loads the data from env vars, defaults and makes sure all values are initialized.

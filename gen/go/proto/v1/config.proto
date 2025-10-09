@@ -74,8 +74,8 @@ message Reporting {
     // When `true`, modifies grpc resolver to use dns instead of passthrough and configure round robin client side loadbalancing
     google.protobuf.BoolValue enable_grpc_loadbalancing = 9;
 
-    // Enable compression
-    google.protobuf.BoolValue compression_enabled = 10;
+    // Compression type
+    CompressionType compression_type = 10;
 }
 
 // Message describes what message should be considered for certain DataCapture option
@@ -222,4 +222,9 @@ message LogsExport {
   // it'll only be available in the local log file.
 
   LogLevel level = 2;
+}
+
+enum CompressionType {
+  COMPRESSION_TYPE_UNSPECIFIED = 0;
+  COMPRESSION_TYPE_GZIP = 1;
 }
