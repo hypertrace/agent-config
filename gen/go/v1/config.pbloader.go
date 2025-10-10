@@ -173,6 +173,12 @@ func (x *Reporting) loadFromEnv(prefix string, defaultValues *Reporting) {
 			x.EnableGrpcLoadbalancing = &wrappers.BoolValue{Value: defaultValues.EnableGrpcLoadbalancing.Value}
 		}
 	}
+	if rawVal, ok := getStringEnv(prefix + "COMPRESSION_TYPE"); ok {
+		x.CompressionType = CompressionType(CompressionType_value[rawVal])
+	} else if x.CompressionType == CompressionType(0) && defaultValues != nil && defaultValues.CompressionType != CompressionType(0) {
+		x.CompressionType = defaultValues.CompressionType
+	}
+
 }
 
 // loadFromEnv loads the data from env vars, defaults and makes sure all values are initialized.
