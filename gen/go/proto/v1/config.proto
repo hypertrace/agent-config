@@ -76,6 +76,9 @@ message Reporting {
 
     // Compression type
     CompressionType compression_type = 10;
+
+    // Span Processor type
+    SpanProcessorType span_processor_type = 11;
 }
 
 // Message describes what message should be considered for certain DataCapture option
@@ -153,6 +156,15 @@ enum TraceReporterType {
 
     // OTLP over http
     OTLP_HTTP = 5;
+}
+
+enum SpanProcessorType {
+    // Default to none. Agent will use it's default span processor(typically batch)
+    SPAN_PROCESSOR_TYPE_UNSPECIFIED = 0;
+
+    SPAN_PROCESSOR_TYPE_BATCH = 1;
+    
+    SPAN_PROCESSOR_TYPE_SIMPLE = 2;
 }
 
 // MetricReporterType represents the reporting format for metric data.
